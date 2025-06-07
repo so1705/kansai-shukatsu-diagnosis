@@ -13,9 +13,8 @@ export default function ProgressBar({ now, max }: Props) {
           style={{ width: `${percent}%` }}
         />
       </div>
-      <div className="mt-2 text-center text-[#1976d2] font-bold text-sm tracking-wider">
-        進捗 {now} / {max}
+     
       </div>
-    </div>
+ 
   );
 }
