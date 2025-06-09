@@ -88,7 +88,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-2">
+    <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-2 relative">
       <div
         className="
           w-full max-w-md mx-auto
@@ -127,7 +127,7 @@ export default function Home() {
 
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
-          <div className="w-full flex flex-col items-center relative pb-36">
+          <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               インスタのユーザー名かLINEの名前の名前を入力してください
             </h2>
@@ -147,29 +147,9 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* 画面下部中央に画像2枚横並び */}
-            <div className="fixed bottom-16 left-1/2 -translate-x-1/2 flex flex-row gap-6 z-20">
-              <Image
-                src="/username-illust1.png"
-                alt="イラスト1"
-                width={110}
-                height={110}
-                className="rounded-xl drop-shadow-md"
-                priority
-              />
-              <Image
-                src="/username-illust2.png"
-                alt="イラスト2"
-                width={110}
-                height={110}
-                className="rounded-xl drop-shadow-md"
-                priority
-              />
-            </div>
           </div>
         )}
 
-        {/* 以下STEP 2以降はそのまま */}
         {/* STEP 2: 学年 */}
         {step === 2 && (
           <>
@@ -304,6 +284,30 @@ export default function Home() {
           </>
         )}
       </div>
+
+      {/* === 画像：ユーザー名入力時のみ画面下部中央 === */}
+      {step === 1 && (
+        <div className="fixed inset-x-0 bottom-7 flex justify-center z-10 pointer-events-none">
+          <div className="flex flex-row gap-4">
+            <Image
+              src="/username-illust1.png"
+              alt="イラスト1"
+              width={120}
+              height={120}
+              className="rounded-xl drop-shadow-md"
+              priority
+            />
+            <Image
+              src="/username-illust2.png"
+              alt="イラスト2"
+              width={120}
+              height={120}
+              className="rounded-xl drop-shadow-md"
+              priority
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

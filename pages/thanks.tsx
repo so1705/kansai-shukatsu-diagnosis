@@ -1,19 +1,18 @@
 export default function Thanks() {
   return (
-    <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4 relative">
+    <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 relative">
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center">
         <div className="text-3xl md:text-4xl font-extrabold text-[#223a50] mb-4 text-center">
           ご回答ありがとうございました！
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
           回答内容が送信されました。<br />
-          結果のフィードバックはLINEやDMでお送りします!
+          結果のフィードバックはLINEやDMでお送りします。
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
               更に詳しいサポートは下記の公式LINEやインスタより配信中です！
             </span>
           </div>
-          {/* SNSリンクボタン */}
           <div className="flex flex-row justify-center items-center gap-5 mt-2">
             <a
               href="https://lin.ee/1ykc4mK"
@@ -34,7 +33,7 @@ export default function Thanks() {
           </div>
         </div>
       </div>
-      {/* 画面下部に戻るボタン（中央固定・カード外） */}
+      {/* 戻るボタンを画面下部中央に */}
       <div className="fixed inset-x-0 bottom-10 flex justify-center z-10">
         <a
           href="/"
