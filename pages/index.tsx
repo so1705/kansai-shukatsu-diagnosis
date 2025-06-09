@@ -127,7 +127,7 @@ export default function Home() {
 
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               インスタのユーザー名かLINEの名前の名前を入力してください
             </h2>
@@ -147,8 +147,8 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* === 画像を下部中央に2枚横並びで表示 === */}
-            <div className="flex flex-row justify-center gap-4 mt-10 w-full">
+            {/* 下部中央に画像2枚並べて表示 */}
+            <div className="flex flex-row justify-center gap-4 absolute left-1/2 -translate-x-1/2 bottom-4">
               <Image
                 src="/username-illust1.png"
                 alt="イラスト1"
@@ -193,8 +193,115 @@ export default function Home() {
             {error && <div className="text-red-500 text-base mb-3">{error}</div>}
           </>
         )}
-        {/* --- 以下略 --- */}
-        {/* 以降も同じように他のstepも続けてください */}
+
+        {/* STEP 3: 学部 */}
+        {step === 3 && (
+          <>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              学部は何ですか？
+            </h2>
+            <input
+              className="w-full border border-gray-300 rounded-xl px-5 py-5 text-2xl mb-4"
+              placeholder="例：経済学部"
+              value={extra.department}
+              onChange={(e) => handleDepartment(e.target.value)}
+              maxLength={30}
+            />
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+            <button
+              onClick={() =>
+                extra.department ? setStep(step + 1) : setError("学部を入力してください")
+              }
+              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
+            >
+              次へ
+            </button>
+          </>
+        )}
+
+        {/* STEP 4: 希望年収 */}
+        {step === 4 && (
+          <>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              希望年収はどれくらいですか！？
+            </h2>
+            <div className="w-full grid gap-5 mb-4">
+              {incomeOptions.map((v) => (
+                <button
+                  key={v}
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
+                  ${extra.income === v
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
+                  onClick={() => handleIncome(v)}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+          </>
+        )}
+
+        {/* STEP 5: 希望職柄 */}
+        {step === 5 && (
+          <>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              希望する職柄を選択してください！（複数選択可）
+            </h2>
+            <div className="w-full grid gap-5 mb-4">
+              {jobTypeOptions.map((v) => (
+                <button
+                  key={v}
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
+                  ${extra.jobType === v
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
+                  onClick={() => handleJobType(v)}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+          </>
+        )}
+
+        {/* STEP 6: 志望企業群 */}
+        {step === 6 && (
+          <>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              志望企業群を一つ以上選択してください！
+            </h2>
+            <div className="w-full grid gap-5 mb-4">
+              {companyOptions.map((v) => (
+                <label
+                  key={v}
+                  className="flex items-center w-full bg-orange-50 rounded-xl py-4 px-3 border border-gray-200 cursor-pointer mb-1"
+                >
+                  <input
+                    type="checkbox"
+                    name="companies"
+                    value={v}
+                    checked={extra.companies.includes(v)}
+                    onChange={() => handleCompanies(v)}
+                    className="mr-4 scale-125 accent-orange-500"
+                  />
+                  <span className="text-xl">{v}</span>
+                </label>
+              ))}
+            </div>
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+            <button
+              onClick={goQuestions}
+              className="w-full py-7 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl mt-2 shadow-lg"
+            >
+              診断スタート！
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
