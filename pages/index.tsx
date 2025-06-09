@@ -91,9 +91,16 @@ export default function Home() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-start pt-4 px-2">
       <div className="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-lg py-8 px-5 flex flex-col items-center my-auto">
         {/* ロゴ：上部に小さく・余白控えめで表示 */}
-        <div className="mt-2 mb-3">
-          <Image src="/logo.png" alt="ロゴ" width={100} height={100} />
-        </div>
+                <div className="flex flex-col items-center mb-2">
+                  <Image
+                    src="/logo.png"
+                    alt="ロゴ"
+                    width={100}
+                    height={100}
+                    className="mb-6"
+                    priority
+                  />
+                </div>
         {/* STEP 0: はじめる */}
         {step === 0 && (
           <>
@@ -240,7 +247,7 @@ export default function Home() {
             {error && <div className="text-red-500 text-base mb-2">{error}</div>}
             <button
               onClick={goQuestions}
-              className="w-full py-4 bg-orange-400 hover:bg-orange-500 text-black text-xl font-bold rounded-xl mt-2 shadow-md"
+              className="w-full py-8 bg-orange-400 hover:bg-orange-500 text-black text-3xl font-bold rounded-xl mt-2 shadow-md"
             >
               診断スタート！
             </button>
