@@ -37,15 +37,6 @@ export default function Thanks() {
           </div>
         </div>
       </div>
-      {/* 戻るボタン：カードの外、画面下部固定 */}
-      <div className="fixed inset-x-0 bottom-4 flex justify-center z-10">
-        <a
-          href="/"
-          className="px-10 py-4 bg-[#ffb94c] text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition"
-        >
-          最初の画面へ戻る
-        </a>
       </div>
-    </div>
   );
 }
