@@ -127,7 +127,7 @@ export default function Home() {
 
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
-          <div className="w-full flex flex-col items-center relative">
+          <div className="w-full flex flex-col items-center relative pb-36">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               インスタのユーザー名かLINEの名前の名前を入力してください
             </h2>
@@ -147,8 +147,8 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* 下部中央に画像2枚並べて表示 */}
-            <div className="flex flex-row justify-center gap-4 absolute left-1/2 -translate-x-1/2 bottom-4">
+            {/* 画面下部中央に画像2枚横並び */}
+            <div className="fixed bottom-16 left-1/2 -translate-x-1/2 flex flex-row gap-6 z-20">
               <Image
                 src="/username-illust1.png"
                 alt="イラスト1"
@@ -169,6 +169,7 @@ export default function Home() {
           </div>
         )}
 
+        {/* 以下STEP 2以降はそのまま */}
         {/* STEP 2: 学年 */}
         {step === 2 && (
           <>
