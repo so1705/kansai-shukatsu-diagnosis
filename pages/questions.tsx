@@ -115,8 +115,8 @@ export default function QuestionsPage() {
             <Image
               src={questions[step].image}
               alt="イラスト"
-              width={90}
-              height={90}
+              width={200}
+              height={200}
               className="rounded-xl drop-shadow-md"
               priority
             />
