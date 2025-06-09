@@ -3,6 +3,7 @@ import Image from "next/image";
 export default function Thanks() {
   return (
     <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4 relative">
+      {/* カード本体 */}
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center pb-28">
         <Image src="/logo.png" alt="ロゴ" width={200} height={200} className="mb-8" priority />
         <div className="text-3xl md:text-4xl font-extrabold text-[#223a50] mb-4 text-center">
@@ -13,7 +14,7 @@ export default function Thanks() {
           結果のフィードバックはLINEやDMでお送りします。
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
-              更に詳しいサポートは下記の公式LINEやインスタより配信中です！
+              更に詳しいサポートは下記の公式LINEやインスタURLをクリック！
             </span>
           </div>
           <div className="flex flex-row justify-center items-center gap-5 mt-2">
@@ -36,6 +37,7 @@ export default function Thanks() {
           </div>
         </div>
       </div>
+      {/* 戻るボタン：カードの外、画面下部固定 */}
       <div className="fixed inset-x-0 bottom-4 flex justify-center z-10">
         <a
           href="/"
