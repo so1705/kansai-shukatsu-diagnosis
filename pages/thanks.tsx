@@ -16,7 +16,7 @@ export default function Thanks() {
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
             </span>
           </div>
-          <div className="flex flex-row justify-center items-center gap-8 mt-2">
+          <div className="flex flex-row justify-center items-center gap-16 mt-8 mb-2">
             <a
               href="https://lin.ee/1ykc4mK"
               target="_blank"
