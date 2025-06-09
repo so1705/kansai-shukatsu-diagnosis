@@ -5,19 +5,18 @@ export default function Thanks() {
     <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4 relative">
       {/* カード本体 */}
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center pb-28">
-        <Image src="/logo.png" alt="ロゴ" width={200} height={200} className="mb-8" priority />
+        <Image src="/logo.png" alt="ロゴ" width={230} height={200} className="mb-8" priority />
         <div className="text-3xl md:text-4xl font-extrabold text-[#223a50] mb-4 text-center">
-          ご回答ありがとうございました！
+          回答が送信されました！
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
-          回答内容が送信されました。<br />
-          結果のフィードバックはLINEやDMでお送りします。
+          分析結果はLINEまたはインスタのDMで送らせていただくので<br />
+          下記URLよりLINEかDMで「自己分析」と送信ください！
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
-              更に詳しいサポートは下記の公式LINEやインスタURLをクリック！
             </span>
           </div>
-          <div className="flex flex-row justify-center items-center gap-5 mt-2">
+          <div className="flex flex-row justify-center items-center gap-10 mt-2">
             <a
               href="https://lin.ee/1ykc4mK"
               target="_blank"
