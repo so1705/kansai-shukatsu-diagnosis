@@ -152,16 +152,16 @@ export default function Home() {
               <Image
                 src="/username-illust1.png"
                 alt="イラスト1"
-                width={110}
-                height={110}
+                width={190}
+                height={190}
                 className="rounded-xl drop-shadow-md"
                 priority
               />
               <Image
                 src="/username-illust2.png"
                 alt="イラスト2"
-                width={110}
-                height={110}
+                width={190}
+                height={190}
                 className="rounded-xl drop-shadow-md"
                 priority
               />
