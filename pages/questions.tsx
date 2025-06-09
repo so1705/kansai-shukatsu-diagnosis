@@ -50,8 +50,8 @@ export default function QuestionsPage() {
 
   // デザイン
   return (
-    <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-20 px-10 min-h-[500px]">
+    <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 relative">
+      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-20 px-10 min-h-[500px] relative">
         {/* ロゴ */}
         <div className="flex flex-col items-center mb-2">
           <Image
@@ -101,7 +101,20 @@ export default function QuestionsPage() {
         ) : (
           <div className="text-center py-20 text-xl">診断結果を送信中...</div>
         )}
-
+        {/* === ここが追加部分！ === */}
+        {/* イラストを画面下部中央・小さめに表示 */}
+        {questions[step]?.image && (
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <Image
+              src={questions[step].image}
+              alt="イラスト"
+              width={90}
+              height={90}
+              className="rounded-xl drop-shadow-md"
+              priority
+            />
+          </div>
+        )}
       </div>
     </div>
   );
