@@ -66,17 +66,9 @@ export default function QuestionsPage() {
 
       {/* 質問・選択肢カード */}
       <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-16 px-6 min-h-[500px] relative mb-14">
-        {/* プログレスバー */}
-        <div className="w-full max-w-md mb-6">
-          <ProgressBar now={step + 1} max={questions.length} />
-        </div>
         {/* 設問エリア */}
         {step < questions.length ? (
           <div className="w-full flex flex-col items-center">
-            {/* 進捗表示 */}
-            <div className="text-center text-[#1976d2] text-sm mb-2 font-bold">
-              進捗 {step + 1} / {questions.length}
-            </div>
             {/* 設問 */}
             <div className="text-center font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50]">
               {questions[step].question}
@@ -111,11 +103,11 @@ export default function QuestionsPage() {
         )}
         {/* === 下部中央イラスト === */}
         {questions[step]?.image && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-[20px]">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-[40px]">
             <Image
               src={questions[step].image}
               alt="イラスト"
-              width={200}
+              width={300}
               height={200}
               className="rounded-xl drop-shadow-md"
               priority
