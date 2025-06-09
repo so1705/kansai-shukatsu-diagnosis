@@ -214,7 +214,7 @@ export default function Home() {
         {/* STEP 5: 希望職柄 */}
         {step === 5 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">希望する職柄を選択してください！</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">希望する職柄を選択してください！（複数選択可）</h2>
             <div className="w-full grid gap-5 mb-4">
               {jobTypeOptions.map((v) => (
                 <button
