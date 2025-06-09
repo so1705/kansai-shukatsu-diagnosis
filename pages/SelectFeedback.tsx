@@ -33,7 +33,7 @@ export default function SelectFeedback() {
         <div className="w-full flex flex-col gap-6">
           <button
             onClick={() => handleSelect("interview")}
-            className="w-full bg-[#ffb94c] text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
+            className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
           >
             <span className="text-3xl font-bold mb-6">分析結果＋無料オンライン面談</span>
             <span className="text-base font-normal text-gray-700">

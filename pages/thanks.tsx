@@ -18,7 +18,7 @@ export default function Thanks() {
           </div>
           <div className="flex flex-row justify-center items-center gap-16 mt-8 mb-2">
             <a
-              href="https://lin.ee/1ykc4mK"
+              href="https://lin.ee/KwguLiV"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-white border-2 border-[#20b96a] rounded-xl font-bold shadow hover:bg-[#20b96a] transition text-lg text-[#168f52] hover:text-white"
