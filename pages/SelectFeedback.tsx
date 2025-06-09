@@ -17,8 +17,8 @@ export default function SelectFeedback() {
           <Image
             src="/thanks.png" // publicディレクトリ直下に画像を入れてください
             alt="フィードバックイラスト"
-            width={180}
-            height={110}
+            width={230}
+            height={230}
             className="object-contain"
             priority
           />

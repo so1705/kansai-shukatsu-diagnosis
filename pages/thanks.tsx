@@ -21,7 +21,8 @@ export default function Thanks() {
               href="https://lin.ee/1ykc4mK"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-xl font-bold shadow hover:bg-green-600 transition text-lg"
+              className="inline-flex items-center px-6 py-3 bg-white border-2 border-[#20b96a] rounded-xl font-bold shadow hover:bg-[#20b96a] transition text-lg text-[#168f52] hover:text-white"
+              style={{ letterSpacing: "0.04em" }}
             >
               公式LINE
             </a>
@@ -29,8 +30,9 @@ export default function Thanks() {
               href="https://www.instagram.com/teppen_syukatsu?igsh=MW9zbnljaHh3c2RieQ%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-[#ffb94c] from-pink-500 via-red-500 to-yellow-500 text-white rounded-xl font-bold shadow hover:opacity-90 transition text-lg ml-4"
-            >
+              className="inline-flex items-center px-6 py-3 bg-white border-2 border-[#9b59b6] rounded-xl font-bold shadow hover:bg-[#9b59b6] transition text-lg text-[#9b59b6] hover:text-white"
+              style={{ letterSpacing: "0.04em" }}
+              >
               Instagram
             </a>
           </div>
