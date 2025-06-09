@@ -38,7 +38,7 @@ export default function QuestionsPage() {
         companies: companyArr,
         answers,
       }).then(() => {
-        router.replace("/feedback");
+        router.replace("/thanks");
       });
     }
   }, [answers]);
