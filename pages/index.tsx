@@ -98,6 +98,7 @@ export default function Home() {
           flex flex-col items-center
           my-8 md:my-24
           transition-all
+          relative
         "
       >
         {/* ロゴ：上部に小さく・余白控えめで表示 */}
@@ -121,11 +122,11 @@ export default function Home() {
               解答時間約5分！<br />
               8万通りの分析結果から自分の得意不得意がわかる！
             </p>
-      </>
-    )}
+          </>
+        )}
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
-          <>
+          <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">インスタのユーザー名かLINEの名前の名前を入力してください</h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
@@ -143,7 +144,18 @@ export default function Home() {
             >
               次へ
             </button>
-          </>
+            {/* ここでイラストを下部中央に表示 */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-4">
+              <Image
+                src="/username-illust.png"
+                alt="名前入力イラスト"
+                width={120}
+                height={120}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+            </div>
+          </div>
         )}
         {/* STEP 2: 学年 */}
         {step === 2 && (
@@ -155,9 +167,9 @@ export default function Home() {
                   key={v}
                   className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.grade === v
-                      ? "bg-orange-200 text-orange-900"
-                      : "bg-orange-50 hover:bg-orange-100 text-gray-900"
-                    }`}
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
                   onClick={() => handleGrade(v)}
                 >
                   {v}
@@ -199,9 +211,9 @@ export default function Home() {
                   key={v}
                   className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.income === v
-                      ? "bg-orange-200 text-orange-900"
-                      : "bg-orange-50 hover:bg-orange-100 text-gray-900"
-                    }`}
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
                   onClick={() => handleIncome(v)}
                 >
                   {v}
@@ -221,9 +233,9 @@ export default function Home() {
                   key={v}
                   className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.jobType === v
-                      ? "bg-orange-200 text-orange-900"
-                      : "bg-orange-50 hover:bg-orange-100 text-gray-900"
-                    }`}
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
                   onClick={() => handleJobType(v)}
                 >
                   {v}
