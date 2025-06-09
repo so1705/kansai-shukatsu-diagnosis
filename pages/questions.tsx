@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import questions from "../data/questions"; // 40問配列
 import ProgressBar from "../components/ProgressBar";
+import questions from "../data/questions"; // 40問配列
 import Image from "next/image";
 import axios from "axios";
 
