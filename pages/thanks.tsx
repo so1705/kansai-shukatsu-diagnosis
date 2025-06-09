@@ -16,7 +16,7 @@ export default function Thanks() {
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
             </span>
           </div>
-          <div className="flex flex-row justify-center items-center gap-10 mt-2">
+          <div className="flex flex-row justify-center items-center gap-8 mt-2">
             <a
               href="https://lin.ee/1ykc4mK"
               target="_blank"
@@ -29,7 +29,7 @@ export default function Thanks() {
               href="https://www.instagram.com/teppen_syukatsu?igsh=MW9zbnljaHh3c2RieQ%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-xl font-bold shadow hover:opacity-90 transition text-lg"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-xl font-bold shadow hover:opacity-90 transition text-lg ml-4"
             >
               Instagram
             </a>
