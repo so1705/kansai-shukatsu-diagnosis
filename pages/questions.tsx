@@ -73,7 +73,8 @@ export default function QuestionsPage() {
             <div className="text-center font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50]">
               {questions[step].question}
             </div>
-            <div className="flex flex-col items-center w-full gap-5">
+            {/* 選択肢エリア */}
+            <div className="flex flex-col w-full gap-8 items-center">
               {questions[step].options.map((opt: string, i: number) => (
                 <button
                   key={i}
@@ -84,20 +85,23 @@ export default function QuestionsPage() {
                   {opt}
                 </button>
               ))}
-              {/* 戻るボタン：1問目以外で表示 */}
+              {/* 戻るボタン：下側・やや左寄せ */}
               {step > 0 && (
-                <button
-                  onClick={handleBack}
-                  className="mt-4 px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 text-base font-semibold transition"
-                >
-                  ← 前の設問に戻る
-                </button>
+                <div className="w-full flex justify-start mt-10">
+                  <button
+                    onClick={handleBack}
+                    className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 text-base font-semibold transition shadow"
+                  >
+                    ← 前の設問に戻る
+                  </button>
+                </div>
               )}
             </div>
           </div>
         ) : (
           <div className="text-center py-20 text-xl">診断結果を送信中...</div>
         )}
+
       </div>
     </div>
   );
