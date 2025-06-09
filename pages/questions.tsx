@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import ProgressBar from "../components/ProgressBar";
 import questions from "../data/questions"; // 40問配列
+import ProgressBar from "../components/ProgressBar";
 import Image from "next/image";
 import axios from "axios";
 
@@ -16,6 +16,14 @@ export default function QuestionsPage() {
   const handleAnswer = (ans: string) => {
     setAnswers([...answers, ans]);
     setStep(step + 1);
+  };
+
+  // 前の設問に戻る
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+      setAnswers(answers.slice(0, -1));
+    }
   };
 
   // 終了時に送信
@@ -76,6 +84,15 @@ export default function QuestionsPage() {
                   {opt}
                 </button>
               ))}
+              {/* 戻るボタン：1問目以外で表示 */}
+              {step > 0 && (
+                <button
+                  onClick={handleBack}
+                  className="mt-4 px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 text-base font-semibold transition"
+                >
+                  ← 前の設問に戻る
+                </button>
+              )}
             </div>
           </div>
         ) : (
