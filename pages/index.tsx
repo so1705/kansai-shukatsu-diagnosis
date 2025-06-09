@@ -124,9 +124,10 @@ export default function Home() {
             </p>
           </>
         )}
+
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
-          <div className="w-full flex flex-col items-center relative">
+          <div className="w-full flex flex-col items-center">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               インスタのユーザー名かLINEの名前の名前を入力してください
             </h2>
@@ -146,31 +147,34 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* 下部に画像2枚を隣り合わせで表示 */}
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex flex-row gap-3">
+            {/* === 画像を下部中央に2枚横並びで表示 === */}
+            <div className="flex flex-row justify-center gap-4 mt-10 w-full">
               <Image
                 src="/username-illust1.png"
                 alt="イラスト1"
-                width={100}
-                height={100}
+                width={110}
+                height={110}
                 className="rounded-xl drop-shadow-md"
                 priority
               />
               <Image
                 src="/username-illust2.png"
                 alt="イラスト2"
-                width={100}
-                height={100}
+                width={110}
+                height={110}
                 className="rounded-xl drop-shadow-md"
                 priority
               />
             </div>
           </div>
         )}
-        {/* STEP 2 以降はそのまま */}
+
+        {/* STEP 2: 学年 */}
         {step === 2 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">現在何回生ですか？</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              現在何回生ですか？
+            </h2>
             <div className="w-full grid gap-5 mb-4">
               {gradeOptions.map((v) => (
                 <button
@@ -189,10 +193,8 @@ export default function Home() {
             {error && <div className="text-red-500 text-base mb-3">{error}</div>}
           </>
         )}
-        {/* ...以下略、同じ内容を続けてOK */}
-        {/* 他のSTEP部分は省略（今まで通りで大丈夫です） */}
-        {/* 省略したい場合は元コードをコピペしてください */}
-        {/* ... */}
+        {/* --- 以下略 --- */}
+        {/* 以降も同じように他のstepも続けてください */}
       </div>
     </div>
   );
