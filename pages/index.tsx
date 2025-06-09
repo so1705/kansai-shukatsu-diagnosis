@@ -147,8 +147,28 @@ export default function Home() {
             >
               次へ
             </button>
+              {/* === 画像を下部中央に2枚横並びで表示 === */}
+            <div className="flex flex-row justify-center gap-4 mt-10 w-full">
+              <Image
+                src="/username-illust1.png"
+                alt="イラスト1"
+                width={110}
+                height={110}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+              <Image
+                src="/username-illust2.png"
+                alt="イラスト2"
+                width={110}
+                height={110}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+            </div>
           </div>
         )}
+          </div>
 
         {/* STEP 2: 学年 */}
         {step === 2 && (
@@ -284,30 +304,5 @@ export default function Home() {
           </>
         )}
       </div>
-
-      {/* === 画像：ユーザー名入力時のみ画面下部中央 === */}
-      {step === 1 && (
-        <div className="fixed inset-x-0 bottom-7 flex justify-center z-10 pointer-events-none">
-          <div className="flex flex-row gap-4">
-            <Image
-              src="/username-illust1.png"
-              alt="イラスト1"
-              width={120}
-              height={120}
-              className="rounded-xl drop-shadow-md"
-              priority
-            />
-            <Image
-              src="/username-illust2.png"
-              alt="イラスト2"
-              width={120}
-              height={120}
-              className="rounded-xl drop-shadow-md"
-              priority
-            />
-          </div>
-        </div>
-      )}
-    </div>
   );
 }
