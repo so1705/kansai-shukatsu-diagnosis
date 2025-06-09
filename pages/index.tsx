@@ -118,9 +118,9 @@ export default function Home() {
               診断スタート！
             </button>
             <p className="text-sm md:text-base text-gray-500 mt-2 mb-4 text-center font-semibold leading-relaxed">
-          個人情報登録不要！完全無料！<br />
-          約3分間で自分の得意不得意がわかる！
-        </p>
+              解答時間約5分！<br />
+              8万通りの分析結果から自分の得意不得意がわかる！
+            </p>
       </>
     )}
         {/* STEP 1: ユーザー名 */}
