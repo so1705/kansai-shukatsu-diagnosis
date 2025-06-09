@@ -1,7 +1,10 @@
+import Image from "next/image";
+
 export default function Thanks() {
   return (
-    <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 relative">
-      <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center">
+    <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4 relative">
+      <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center pb-28">
+        <Image src="/logo.png" alt="ロゴ" width={200} height={200} className="mb-8" priority />
         <div className="text-3xl md:text-4xl font-extrabold text-[#223a50] mb-4 text-center">
           ご回答ありがとうございました！
         </div>
@@ -33,8 +36,7 @@ export default function Thanks() {
           </div>
         </div>
       </div>
-      {/* 戻るボタンを画面下部中央に */}
-      <div className="fixed inset-x-0 bottom-10 flex justify-center z-10">
+      <div className="fixed inset-x-0 bottom-4 flex justify-center z-10">
         <a
           href="/"
           className="px-10 py-4 bg-[#ffb94c] text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition"
