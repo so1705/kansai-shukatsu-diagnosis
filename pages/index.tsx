@@ -88,44 +88,58 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-start pt-4 px-2">
-      <div className="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-lg py-8 px-5 flex flex-col items-center my-auto">
+    <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-2">
+      <div
+        className="
+          w-full max-w-md mx-auto
+          bg-white rounded-3xl shadow-lg
+          py-8 md:py-16
+          px-4 md:px-10
+          flex flex-col items-center
+          my-8 md:my-24
+          transition-all
+        "
+      >
         {/* ロゴ：上部に小さく・余白控えめで表示 */}
-    <div className="mt-2 mb-3">
-          <Image src="/logo.png" alt="ロゴ" width={150} height={150} />
+        <div className="mt-2 mb-4">
+          <Image src="/logo.png" alt="ロゴ" width={120} height={120} />
         </div>
 
         {/* STEP 0: はじめる */}
         {step === 0 && (
           <>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#1d3144] text-center mb-6 mt-2">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#1d3144] text-center mb-8 mt-2">
               関西就活コミュニティ<br />自己分析診断
             </h1>
             <button
               onClick={() => setStep(1)}
-              className="w-full py-8 bg-orange-400 hover:bg-orange-500 text-black text-4xl font-bold rounded-xl transition mb-4 shadow-md"
+              className="w-full py-7 bg-orange-400 hover:bg-orange-500 text-black text-3xl font-bold rounded-xl transition mb-6 shadow-lg"
             >
               診断スタート！
             </button>
-          </>
-        )}
+            <p className="text-sm md:text-base text-gray-500 mt-2 mb-4 text-center font-semibold leading-relaxed">
+          個人情報登録不要！完全無料！<br />
+          約3分間で自分の得意不得意がわかる！
+        </p>
+      </>
+    )}
         {/* STEP 1: ユーザー名 */}
         {step === 1 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">インスタのユーザー名かLINEの名前の名前を入力してください</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">インスタのユーザー名かLINEの名前の名前を入力してください</h2>
             <input
-              className="w-full border border-gray-300 rounded-xl px-6 py-5 text-3xl mb-4"
+              className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
               placeholder="例：insta: @xxxx、LINE: 田中太郎"
               value={extra.username}
               onChange={(e) => setExtra({ ...extra, username: e.target.value })}
               maxLength={40}
             />
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
             <button
               onClick={() =>
                 extra.username ? setStep(step + 1) : setError("ユーザー名を入力してください")
               }
-              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-3xl font-bold rounded-xl shadow-md"
+              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >
               次へ
             </button>
@@ -134,12 +148,12 @@ export default function Home() {
         {/* STEP 2: 学年 */}
         {step === 2 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">現在何回生ですか？</h2>
-            <div className="w-full grid gap-4 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">現在何回生ですか？</h2>
+            <div className="w-full grid gap-5 mb-4">
               {gradeOptions.map((v) => (
                 <button
                   key={v}
-                  className={`w-full py-6 rounded-xl border border-gray-200 text-3xl font-semibold
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.grade === v
                       ? "bg-orange-200 text-orange-900"
                       : "bg-orange-50 hover:bg-orange-100 text-gray-900"
@@ -150,26 +164,26 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
           </>
         )}
         {/* STEP 3: 学部 */}
         {step === 3 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">学部は何ですか？</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">学部は何ですか？</h2>
             <input
-              className="w-full border border-gray-300 rounded-xl px-5 py-4 text-xl mb-4"
+              className="w-full border border-gray-300 rounded-xl px-5 py-5 text-2xl mb-4"
               placeholder="例：経済学部"
               value={extra.department}
               onChange={(e) => handleDepartment(e.target.value)}
               maxLength={30}
             />
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
             <button
               onClick={() =>
                 extra.department ? setStep(step + 1) : setError("学部を入力してください")
               }
-              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-3xl font-bold rounded-xl shadow-md"
+              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >
               次へ
             </button>
@@ -178,12 +192,12 @@ export default function Home() {
         {/* STEP 4: 希望年収 */}
         {step === 4 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">希望年収はどれくらいですか！？</h2>
-            <div className="w-full grid gap-4 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">希望年収はどれくらいですか！？</h2>
+            <div className="w-full grid gap-5 mb-4">
               {incomeOptions.map((v) => (
                 <button
                   key={v}
-                  className={`w-full py-6 rounded-xl border border-gray-200 text-3xl font-semibold
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.income === v
                       ? "bg-orange-200 text-orange-900"
                       : "bg-orange-50 hover:bg-orange-100 text-gray-900"
@@ -194,18 +208,18 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
           </>
         )}
         {/* STEP 5: 希望職柄 */}
         {step === 5 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">希望する職柄を選択してください！</h2>
-            <div className="w-full grid gap-4 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">希望する職柄を選択してください！</h2>
+            <div className="w-full grid gap-5 mb-4">
               {jobTypeOptions.map((v) => (
                 <button
                   key={v}
-                  className={`w-full py-6 rounded-xl border border-gray-200 text-3xl font-semibold
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
                   ${extra.jobType === v
                       ? "bg-orange-200 text-orange-900"
                       : "bg-orange-50 hover:bg-orange-100 text-gray-900"
@@ -216,14 +230,14 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
           </>
         )}
         {/* STEP 6: 志望企業群 */}
         {step === 6 && (
           <>
-            <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d3144] text-center">志望企業群を一つ以上選択してください！</h2>
-            <div className="w-full grid gap-4 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">志望企業群を一つ以上選択してください！</h2>
+            <div className="w-full grid gap-5 mb-4">
               {companyOptions.map((v) => (
                 <label key={v} className="flex items-center w-full bg-orange-50 rounded-xl py-4 px-3 border border-gray-200 cursor-pointer mb-1">
                   <input
@@ -238,10 +252,10 @@ export default function Home() {
                 </label>
               ))}
             </div>
-            {error && <div className="text-red-500 text-base mb-2">{error}</div>}
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
             <button
               onClick={goQuestions}
-              className="w-full py-8 bg-orange-400 hover:bg-orange-500 text-black text-3xl font-bold rounded-xl mt-2 shadow-md"
+              className="w-full py-7 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl mt-2 shadow-lg"
             >
               診断スタート！
             </button>

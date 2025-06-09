@@ -1,3 +1,5 @@
+import ProgressBar from "./ProgressBar"; // ← 追加
+
 type Props = {
   idx: number;
   total: number;
@@ -9,7 +11,8 @@ type Props = {
 export default function QuestionCard({ idx, total, question, options, onAnswer }: Props) {
   return (
     <div className="w-full flex flex-col items-center">
-      {/* <div className="text-[#337ab7] font-semibold text-lg mb-5 tracking-widest">{`Q${idx + 1} / ${total}`}</div> */}
+      {/* プログレスバー追加 */}
+      <ProgressBar now={idx + 1} max={total} />
       <div className="text-3xl md:text-5xl font-black text-center text-[#222] mb-14 leading-snug drop-shadow-sm">
         {question}
       </div>
@@ -29,7 +32,7 @@ export default function QuestionCard({ idx, total, question, options, onAnswer }
               hover:scale-105
               duration-100
               transition
-              max-w-[500px]    /* ←最大幅を500pxにUP（もっと大きくしたければ600pxやnoneでもOK）*/
+              max-w-[500px]
             "
             style={{ letterSpacing: "0.03em" }}
             onClick={() => onAnswer(opt)}
