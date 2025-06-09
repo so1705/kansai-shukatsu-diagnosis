@@ -102,7 +102,7 @@ export default function Home() {
       >
         {/* ロゴ：上部に小さく・余白控えめで表示 */}
         <div className="mt-2 mb-4">
-          <Image src="/logo.png" alt="ロゴ" width={120} height={120} />
+          <Image src="/logo.png" alt="ロゴ" width={180} height={120} />
         </div>
 
         {/* STEP 0: はじめる */}

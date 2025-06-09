@@ -56,8 +56,8 @@ export default function QuestionsPage() {
         <Image
           src="/logo.png"
           alt="ロゴ"
-          width={110}
-          height={110}
+          width={180}
+          height={100}
           className="mb-2"
           priority
         />
