@@ -29,7 +29,7 @@ export default function Thanks() {
               href="https://www.instagram.com/teppen_syukatsu?igsh=MW9zbnljaHh3c2RieQ%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-xl font-bold shadow hover:opacity-90 transition text-lg ml-4"
+              className="inline-flex items-center px-6 py-3 bg-[#ffb94c] from-pink-500 via-red-500 to-yellow-500 text-white rounded-xl font-bold shadow hover:opacity-90 transition text-lg ml-4"
             >
               Instagram
             </a>
