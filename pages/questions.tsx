@@ -43,34 +43,34 @@ export default function QuestionsPage() {
   // デザイン
   return (
     <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-20 px-50 md:px-30 min-h-[500px]">
+      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-20 px-10 min-h-[500px]">
         {/* ロゴ */}
         <div className="flex flex-col items-center mb-2">
           <Image
             src="/logo.png"
             alt="ロゴ"
-            width={250}
-            height={250}
+            width={100}
+            height={100}
             className="mb-6"
             priority
           />
         </div>
         {/* プログレスバー */}
-        <div className="w-full max-w-md mb20">
+        <div className="w-full max-w-md mb-8">
           <ProgressBar now={step + 1} max={questions.length} />
         </div>
         {/* 設問エリア */}
         {step < questions.length ? (
           <div className="w-full flex flex-col items-center">
-            <div className="text-center font-extrabold text-10xl md:text-3xl mb-30 text-[#223a50]">
+            <div className="text-center font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50]">
               {questions[step].question}
             </div>
-            <div className="flex flex-col items-center w-full space-y-15">
+            <div className="flex flex-col items-center w-full gap-5">
               {questions[step].options.map((opt: string, i: number) => (
                 <button
                   key={i}
                   onClick={() => handleAnswer(opt)}
-                  className="w-full max-w-md py-15 text-xl md:text-2xl font-bold bg-[#f7fafc] border-2 border-gray-200 rounded-2xl shadow hover:bg-[#fff3e0] hover:border-[#ffb94c] transition text-[#223a50]"
+                  className="w-full max-w-md py-6 text-2xl md:text-3xl font-bold bg-[#f7fafc] border-2 border-gray-200 rounded-2xl shadow hover:bg-[#fff3e0] hover:border-[#ffb94c] transition text-[#223a50]"
                   style={{ letterSpacing: "0.03em" }}
                 >
                   {opt}
