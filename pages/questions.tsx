@@ -111,7 +111,7 @@ export default function QuestionsPage() {
         )}
         {/* === 下部中央イラスト === */}
         {questions[step]?.image && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-30px]">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-[20px]">
             <Image
               src={questions[step].image}
               alt="イラスト"
