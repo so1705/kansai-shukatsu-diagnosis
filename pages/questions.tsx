@@ -51,25 +51,33 @@ export default function QuestionsPage() {
   // デザイン
   return (
     <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 relative">
-      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-20 px-10 min-h-[500px] relative">
-        {/* ロゴ */}
-        <div className="flex flex-col items-center mb-2">
-          <Image
-            src="/logo.png"
-            alt="ロゴ"
-            width={100}
-            height={100}
-            className="mb-6"
-            priority
-          />
-        </div>
+      {/* === 上部ロゴ === */}
+      <div className="w-full max-w-md flex flex-col items-center pt-8">
+        <Image
+          src="/logo.png"
+          alt="ロゴ"
+          width={110}
+          height={110}
+          className="mb-2"
+          priority
+        />
+        <div className="mb-4"></div>
+      </div>
+
+      {/* 質問・選択肢カード */}
+      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-16 px-6 min-h-[500px] relative mb-14">
         {/* プログレスバー */}
-        <div className="w-full max-w-md mb-8">
+        <div className="w-full max-w-md mb-6">
           <ProgressBar now={step + 1} max={questions.length} />
         </div>
         {/* 設問エリア */}
         {step < questions.length ? (
           <div className="w-full flex flex-col items-center">
+            {/* 進捗表示 */}
+            <div className="text-center text-[#1976d2] text-sm mb-2 font-bold">
+              進捗 {step + 1} / {questions.length}
+            </div>
+            {/* 設問 */}
             <div className="text-center font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50]">
               {questions[step].question}
             </div>
@@ -101,10 +109,9 @@ export default function QuestionsPage() {
         ) : (
           <div className="text-center py-20 text-xl">診断結果を送信中...</div>
         )}
-        {/* === ここが追加部分！ === */}
-        {/* イラストを画面下部中央・小さめに表示 */}
+        {/* === 下部中央イラスト === */}
         {questions[step]?.image && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-70px]">
             <Image
               src={questions[step].image}
               alt="イラスト"
