@@ -1,12 +1,21 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function SelectFeedback() {
   const router = useRouter();
+  const { username } = router.query;
 
-  const handleSelect = (type) => {
-    // 例：サンクスページへ遷移。type情報をクエリで渡すなども可能
-    router.push("/thanks");
+  const handleSelect = async (type: string) => {
+    try {
+      await axios.post("/api/sendToDiscord", {
+        username,
+        feedbackType: type, // どちらを選んだか送信
+      });
+      router.push("/thanks");
+    } catch (err) {
+      alert("送信エラー：" + err?.message);
+    }
   };
 
   return (
@@ -15,7 +24,7 @@ export default function SelectFeedback() {
         {/* ===== イラスト（上部に配置） ===== */}
         <div className="w-full flex justify-center mb-6">
           <Image
-            src="/thanks.png" // publicディレクトリ直下に画像を入れてください
+            src="/thanks.png"
             alt="フィードバックイラスト"
             width={230}
             height={230}
@@ -23,7 +32,7 @@ export default function SelectFeedback() {
             priority
           />
         </div>
-        {/* ===== ロゴやタイトルはその下に配置 ===== */}
+        {/* ===== ロゴやタイトル ===== */}
         <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center">
           ご回答いただきありがとうございました！
         </div>
