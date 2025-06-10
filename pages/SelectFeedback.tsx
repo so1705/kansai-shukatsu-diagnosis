@@ -4,13 +4,27 @@ import axios from "axios";
 
 export default function SelectFeedback() {
   const router = useRouter();
-  const { username } = router.query;
+  const {
+    username,
+    grade,
+    department,
+    income,
+    jobType,
+    companies,
+    answers
+  } = router.query;
 
   const handleSelect = async (type: string) => {
     try {
       await axios.post("/api/sendToDiscord", {
         username,
-        feedbackType: type, // どちらを選んだか送信
+        grade,
+        department,
+        income,
+        jobType,
+        companies: companies?.toString().split(","),
+        answers: answers ? JSON.parse(answers as string) : [],
+        feedbackType: type,
       });
       router.push("/thanks");
     } catch (err) {
@@ -21,7 +35,6 @@ export default function SelectFeedback() {
   return (
     <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4">
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-12 px-6 flex flex-col items-center">
-        {/* ===== イラスト（上部に配置） ===== */}
         <div className="w-full flex justify-center mb-6">
           <Image
             src="/thanks.png"
@@ -32,7 +45,6 @@ export default function SelectFeedback() {
             priority
           />
         </div>
-        {/* ===== ロゴやタイトル ===== */}
         <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center">
           ご回答いただきありがとうございました！
         </div>
