@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 const initialExtra = {
+  feedbackMethod: "",
   username: "",
   grade: "",
   department: "",
@@ -40,6 +41,15 @@ export default function Home() {
   const [extra, setExtra] = useState(initialExtra);
   const [error, setError] = useState("");
 
+  // 各入力ハンドラ
+  const handleFeedbackMethod = (v: string) => {
+    setExtra({ ...extra, feedbackMethod: v });
+    setError("");
+  };
+  const handleUsername = (v: string) => {
+    setExtra({ ...extra, username: v });
+    setError("");
+  };
   const handleGrade = (v: string) => {
     setExtra({ ...extra, grade: v });
     setError("");
@@ -68,7 +78,8 @@ export default function Home() {
   };
 
   const goQuestions = () => {
-    if (!extra.username) return setError("インスタのユーザー名かLINEの名前の名前を入力してください！");
+    if (!extra.feedbackMethod) return setError("フィードバックの受け取り方法を入力してください！");
+    if (!extra.username) return setError("インスタのユーザー名かLINEの名前を入力してください！");
     if (!extra.grade) return setError("学年を選択してください");
     if (!extra.department) return setError("学部を入力してください");
     if (!extra.income) return setError("希望年収はどれくらいですか！？");
@@ -77,6 +88,7 @@ export default function Home() {
     router.push({
       pathname: "/questions",
       query: {
+        feedbackMethod: extra.feedbackMethod,
         username: extra.username,
         grade: extra.grade,
         department: extra.department,
@@ -125,29 +137,80 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 1: ユーザー名 */}
+        {/* STEP 1: フィードバック受け取り方法 */}
         {step === 1 && (
           <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              インスタのユーザー名かLINEの名前の名前を入力してください
+              フィードバックしてほしい<br />
+              方法を入力してください<br />
+              <span className="text-base font-normal text-gray-500">(インスタ or 公式LINE)</span>
             </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
-              placeholder="例：insta: @xxxx、LINE: 田中太郎"
-              value={extra.username}
-              onChange={(e) => setExtra({ ...extra, username: e.target.value })}
+              placeholder="例：インスタ or 公式LINE"
+              value={extra.feedbackMethod}
+              onChange={(e) => handleFeedbackMethod(e.target.value)}
               maxLength={40}
             />
             {error && <div className="text-red-500 text-base mb-3">{error}</div>}
             <button
               onClick={() =>
-                extra.username ? setStep(step + 1) : setError("ユーザー名を入力してください")
+                extra.feedbackMethod
+                  ? setStep(step + 1)
+                  : setError("フィードバックの受け取り方法を入力してください")
               }
               className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >
               次へ
             </button>
-              {/* === 画像を下部中央に2枚横並びで表示 === */}
+            {/* === 画像を下部中央に2枚横並びで表示 === */}
+            <div className="flex flex-row justify-center gap-4 mt-10 w-full">
+              <Image
+                src="/feedback-illust1.png"
+                alt="イラスト1"
+                width={190}
+                height={190}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+              <Image
+                src="/feedback-illust2.png"
+                alt="イラスト2"
+                width={190}
+                height={190}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+            </div>
+          </div>
+        )}
+
+        {/* STEP 2: ユーザー名 */}
+        {step === 2 && (
+          <div className="w-full flex flex-col items-center relative">
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              インスタのユーザー名<br />
+              またはLINEの名前を入力してください
+            </h2>
+            <input
+              className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
+              placeholder="例：insta: @xxxx、LINE: 田中太郎"
+              value={extra.username}
+              onChange={(e) => handleUsername(e.target.value)}
+              maxLength={40}
+            />
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+            <button
+              onClick={() =>
+                extra.username
+                  ? setStep(step + 1)
+                  : setError("ユーザー名を入力してください")
+              }
+              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
+            >
+              次へ
+            </button>
+            {/* === 画像を下部中央に2枚横並びで表示 === */}
             <div className="flex flex-row justify-center gap-4 mt-10 w-full">
               <Image
                 src="/username-illust1.png"
@@ -168,10 +231,9 @@ export default function Home() {
             </div>
           </div>
         )}
-          </div>
 
-        {/* STEP 2: 学年 */}
-        {step === 2 && (
+        {/* STEP 3: 学年 */}
+        {step === 3 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               現在何回生ですか？
@@ -195,8 +257,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 3: 学部 */}
-        {step === 3 && (
+        {/* STEP 4: 学部 */}
+        {step === 4 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               学部は何ですか？
@@ -211,7 +273,9 @@ export default function Home() {
             {error && <div className="text-red-500 text-base mb-3">{error}</div>}
             <button
               onClick={() =>
-                extra.department ? setStep(step + 1) : setError("学部を入力してください")
+                extra.department
+                  ? setStep(step + 1)
+                  : setError("学部を入力してください")
               }
               className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >
@@ -220,8 +284,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 4: 希望年収 */}
-        {step === 4 && (
+        {/* STEP 5: 希望年収 */}
+        {step === 5 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望年収はどれくらいですか！？
@@ -245,8 +309,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 5: 希望職柄 */}
-        {step === 5 && (
+        {/* STEP 6: 希望職柄 */}
+        {step === 6 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望する職柄を選択してください！
@@ -270,8 +334,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 6: 志望企業群 */}
-        {step === 6 && (
+        {/* STEP 7: 志望企業群 */}
+        {step === 7 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               志望企業群を選択してください！（複数選択可）
@@ -304,5 +368,6 @@ export default function Home() {
           </>
         )}
       </div>
+    </div>
   );
 }
