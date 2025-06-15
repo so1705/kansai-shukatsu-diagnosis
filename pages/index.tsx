@@ -163,25 +163,6 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* === 画像を下部中央に2枚横並びで表示 === */}
-            <div className="flex flex-row justify-center gap-4 mt-10 w-full">
-              <Image
-                src="/feedback-illust1.png"
-                alt="イラスト1"
-                width={190}
-                height={190}
-                className="rounded-xl drop-shadow-md"
-                priority
-              />
-              <Image
-                src="/feedback-illust2.png"
-                alt="イラスト2"
-                width={190}
-                height={190}
-                className="rounded-xl drop-shadow-md"
-                priority
-              />
-            </div>
           </div>
         )}
 
