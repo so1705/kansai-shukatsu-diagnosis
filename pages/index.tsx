@@ -142,7 +142,7 @@ export default function Home() {
           <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               フィードバックしてほしい<br />
-              方法を入力してください<br />
+              媒体を入力してください<br />
               <span className="text-base font-normal text-gray-500">(インスタ or 公式LINE)</span>
             </h2>
             <input
