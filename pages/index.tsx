@@ -81,7 +81,7 @@ export default function Home() {
     if (!extra.feedbackMethod) return setError("フィードバックの受け取り方法を入力してください！");
     if (!extra.username) return setError("インスタのユーザー名かLINEの名前を入力してください！");
     if (!extra.grade) return setError("学年を選択してください");
-    if (!extra.department) return setError("学部を入力してください");
+    if (!extra.department) return setError("大学名を入力してください");
     if (!extra.income) return setError("希望年収はどれくらいですか！？");
     if (!extra.jobType) return setError("希望する職柄を選択してください！");
     if (!extra.companies.length) return setError("志望企業群を一つ以上選択してください！");
@@ -242,11 +242,11 @@ export default function Home() {
         {step === 4 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              学部は何ですか？
+              大学名教えてください！
             </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-5 py-5 text-2xl mb-4"
-              placeholder="例：経済学部"
+              placeholder="例：〇〇大学"
               value={extra.department}
               onChange={(e) => handleDepartment(e.target.value)}
               maxLength={30}
@@ -256,7 +256,7 @@ export default function Home() {
               onClick={() =>
                 extra.department
                   ? setStep(step + 1)
-                  : setError("学部を入力してください")
+                  : setError("大学名を入力してください")
               }
               className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >

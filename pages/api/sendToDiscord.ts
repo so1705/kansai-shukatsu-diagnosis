@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     if (username) content += `■ユーザー名：${username}\n`;
     if (grade) content += `■学年：${grade}\n`;
-    if (department) content += `■学部：${department}\n`;
+    if (department) content += `■大学名：${department}\n`;
     if (income) content += `■希望年収：${income}\n`;
     if (jobType) content += `■希望する職柄：${jobType}\n`;
     if (companies && Array.isArray(companies)) {
