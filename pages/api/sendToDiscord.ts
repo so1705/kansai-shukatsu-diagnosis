@@ -7,11 +7,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== "POST") return res.status(405).end();
 
   try {
-    const { username, income, jobType, companies, answers, feedbackType } = req.body;
+    // feedbackMethodで受け取る
+    const {
+      feedbackMethod,
+      username,
+      grade,
+      department,
+      income,
+      jobType,
+      companies,
+      answers,
+    } = req.body;
 
     // メッセージを整形
     let content = `【関西就活コミュニティ 診断回答】\n`;
-    content += `■ユーザー名：${username}\n`;
+    if (feedbackMethod) content += `■フィードバック希望媒体：${feedbackMethod}\n`;
+    if (username) content += `■ユーザー名：${username}\n`;
+    if (grade) content += `■学年：${grade}\n`;
+    if (department) content += `■学部：${department}\n`;
     if (income) content += `■希望年収：${income}\n`;
     if (jobType) content += `■希望する職柄：${jobType}\n`;
     if (companies && Array.isArray(companies)) {
@@ -22,9 +35,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       answers.forEach((ans: string, i: number) => {
         content += `Q${i + 1}: ${ans}\n`;
       });
-    }
-    if (feedbackType) {
-      content += `■フィードバック希望方法：${feedbackType === "interview" ? "面談" : "メール"}\n`;
     }
 
     await axios.post(DISCORD_WEBHOOK_URL, { content });
