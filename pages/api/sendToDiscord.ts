@@ -7,9 +7,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== "POST") return res.status(405).end();
 
   try {
-    // feedbackMethodで受け取る
     const {
-      feedbackMethod,
+      feedbackMethod, // 最初の診断用
+      feedbackType,   // SelectFeedback用
       username,
       grade,
       department,
@@ -21,7 +21,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // メッセージを整形
     let content = `【関西就活コミュニティ 診断回答】\n`;
+
     if (feedbackMethod) content += `■フィードバック希望媒体：${feedbackMethod}\n`;
+    if (feedbackType) {
+      if (feedbackType === "interview") {
+        content += `■フィードバック希望方法：分析結果＋無料オンライン面談\n`;
+      } else if (feedbackType === "resultOnly") {
+        content += `■フィードバック希望方法：分析結果＋メールでフィードバック\n`;
+      } else {
+        content += `■フィードバック希望方法：${feedbackType}\n`;
+      }
+    }
     if (username) content += `■ユーザー名：${username}\n`;
     if (grade) content += `■学年：${grade}\n`;
     if (department) content += `■学部：${department}\n`;
