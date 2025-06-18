@@ -10,8 +10,9 @@ export default function Thanks() {
           回答が送信されました！
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
+          \  注意  /<br />
           分析結果はLINEかインスタで送らせていただくので<br />
-          下記URLよりLINEかインスタアカウントのDMで「自己分析」と送信ください！
+          下記URLの公式LINEかインスタアカウントのDMで「自己分析」と送信ください！
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
             </span>
