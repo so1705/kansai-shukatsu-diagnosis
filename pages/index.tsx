@@ -39,7 +39,7 @@ const concernOptions = [
   "自己分析や業界分析",
   "インターン先探し",
   "ES・GD対策",
-  "特にない",
+  "その他",
 ];
 
 export default function Home() {
