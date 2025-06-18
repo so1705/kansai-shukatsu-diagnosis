@@ -7,8 +7,8 @@ import axios from "axios";
 
 export default function QuestionsPage() {
   const router = useRouter();
-  // feedbackMethodも受け取る
-  const { feedbackMethod, username, grade, department, income, jobType, companies } = router.query;
+  // concernも受け取る！
+  const { feedbackMethod, username, grade, department, income, jobType, companies, concern } = router.query;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const companyArr = typeof companies === "string" ? companies.split(",") : [];
@@ -31,10 +31,11 @@ export default function QuestionsPage() {
   useEffect(() => {
     if (answers.length === questions.length) {
       axios.post("/api/sendToDiscord", {
-        feedbackMethod, // 追加・統一
+        feedbackMethod,
         username,
         grade,
         department,
+        concern, // ← ここを追加！
         income,
         jobType,
         companies: companyArr,
