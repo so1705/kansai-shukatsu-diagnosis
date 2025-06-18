@@ -7,6 +7,7 @@ const initialExtra = {
   username: "",
   grade: "",
   department: "",
+  concern: "", // 追加
   income: "",
   jobType: "",
   companies: [] as string[],
@@ -34,6 +35,12 @@ const companyOptions = [
   "ベンチャー・スタートアップ企業",
   "特に決まっていない／迷い中",
 ];
+const concernOptions = [
+  "自己分析や業界分析",
+  "インターン先探し",
+  "ES・GD対策",
+  "特にない",
+];
 
 export default function Home() {
   const router = useRouter();
@@ -59,6 +66,12 @@ export default function Home() {
     setExtra({ ...extra, department: v });
     setError("");
   };
+  // 追加：悩みハンドラ
+  const handleConcern = (v: string) => {
+    setExtra({ ...extra, concern: v });
+    setError("");
+    setStep(step + 1);
+  };
   const handleIncome = (v: string) => {
     setExtra({ ...extra, income: v });
     setError("");
@@ -82,6 +95,7 @@ export default function Home() {
     if (!extra.username) return setError("インスタのユーザー名かLINEの名前を入力してください！");
     if (!extra.grade) return setError("学年を選択してください");
     if (!extra.department) return setError("大学名を入力してください");
+    if (!extra.concern) return setError("現在就活で悩んでいることを選択してください！");
     if (!extra.income) return setError("希望年収はどれくらいですか！？");
     if (!extra.jobType) return setError("希望する職柄を選択してください！");
     if (!extra.companies.length) return setError("志望企業群を一つ以上選択してください！");
@@ -92,6 +106,7 @@ export default function Home() {
         username: extra.username,
         grade: extra.grade,
         department: extra.department,
+        concern: extra.concern, // 追加
         income: extra.income,
         jobType: extra.jobType,
         companies: extra.companies.join(","),
@@ -113,7 +128,7 @@ export default function Home() {
           relative
         "
       >
-        {/* ロゴ：上部に小さく・余白控えめで表示 */}
+        {/* ロゴ */}
         <div className="mt-2 mb-4">
           <Image src="/logo.png" alt="ロゴ" width={180} height={120} />
         </div>
@@ -191,7 +206,7 @@ export default function Home() {
             >
               次へ
             </button>
-            {/* === 画像を下部中央に2枚横並びで表示 === */}
+            {/* 画像 */}
             <div className="flex flex-row justify-center gap-4 mt-10 w-full">
               <Image
                 src="/username-illust1.png"
@@ -265,8 +280,33 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 5: 希望年収 */}
+        {/* STEP 5: 就活の悩み */}
         {step === 5 && (
+          <>
+            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
+              現在就活で悩んでいることはなんですか？
+            </h2>
+            <div className="w-full grid gap-5 mb-4">
+              {concernOptions.map((v) => (
+                <button
+                  key={v}
+                  className={`w-full py-6 rounded-xl border border-gray-200 text-2xl font-semibold
+                  ${extra.concern === v
+                    ? "bg-orange-200 text-orange-900"
+                    : "bg-orange-50 hover:bg-orange-100 text-gray-900"
+                  }`}
+                  onClick={() => handleConcern(v)}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
+          </>
+        )}
+
+        {/* STEP 6: 希望年収 */}
+        {step === 6 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望年収はどれくらいですか！？
@@ -290,8 +330,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 6: 希望職柄 */}
-        {step === 6 && (
+        {/* STEP 7: 希望職柄 */}
+        {step === 7 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望する職柄を選択してください！
@@ -315,8 +355,8 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 7: 志望企業群 */}
-        {step === 7 && (
+        {/* STEP 8: 志望企業群 */}
+        {step === 8 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               志望企業群を選択してください！（複数選択可）
