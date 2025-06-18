@@ -7,7 +7,6 @@ export default function Thanks() {
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-16 px-6 flex flex-col items-center pb-28">
         <Image src="/logo.png" alt="ロゴ" width={230} height={200} className="mb-8" priority />
         <div className="text-3xl md:text-4xl font-extrabold text-[#223a50] mb-4 text-center">
-          回答が送信されました！
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
           \  注意  /<br />
