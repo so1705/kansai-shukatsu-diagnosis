@@ -149,11 +149,11 @@ export default function Home() {
         {step === 1 && (
           <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              結果は公式LINEでフィードバックさせていただきます！<br />
               LINEの名前を入力してください<br/>
             </h2>
             <h2 className="text-xs md:text-sm mb-5 text-[#1d3144] text-center">
-              （アンケート最後に追加リンクあるのでご安心ください）
+            結果は公式LINEでフィードバックさせていただきます！<br />
+            （アンケート最後に追加リンクあるのでご安心ください）
             </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
