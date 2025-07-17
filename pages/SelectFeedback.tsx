@@ -72,6 +72,7 @@ export default function SelectFeedback() {
             </span>
           </button>
           <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
+          　　　　　　　　　　　<br/>
           ※次のページもあります<br />
           </div>
         </div>
