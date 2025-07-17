@@ -153,6 +153,9 @@ export default function Home() {
               LINEの名前を入力してください<br/>
               （アンケート最後に追加リンクあるのでご安心ください）
             </h2>
+            <h2 className="text-base md:text-lg font-bold mb-5 text-[#1d3144] text-center">
+              （アンケート最後に追加リンクあるのでご安心ください）
+            </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
               placeholder="例:LINE: 田中太郎"
