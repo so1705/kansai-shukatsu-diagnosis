@@ -151,9 +151,8 @@ export default function Home() {
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               結果は公式LINEでフィードバックさせていただきます！<br />
               LINEの名前を入力してください<br/>
-              （アンケート最後に追加リンクあるのでご安心ください）
             </h2>
-            <h2 className="text-base md:text-lg font-bold mb-5 text-[#1d3144] text-center">
+            <h2 className="text-xs md:text-sm mb-5 text-[#1d3144] text-center">
               （アンケート最後に追加リンクあるのでご安心ください）
             </h2>
             <input
