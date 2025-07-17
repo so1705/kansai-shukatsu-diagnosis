@@ -193,7 +193,7 @@ export default function Home() {
         )}
 
         {/* STEP 3: 学年 */}
-        {step === 3 && (
+        {step === 2 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               現在何回生ですか？
@@ -218,7 +218,7 @@ export default function Home() {
         )}
 
         {/* STEP 4: 学部 */}
-        {step === 4 && (
+        {step === 3 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               大学名教えてください！
@@ -245,7 +245,7 @@ export default function Home() {
         )}
 
         {/* STEP 5: 就活の悩み */}
-        {step === 5 && (
+        {step === 4 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               現在就活で悩んでいることはなんですか？
@@ -270,7 +270,7 @@ export default function Home() {
         )}
 
         {/* STEP 6: 希望年収 */}
-        {step === 6 && (
+        {step === 5 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望年収はどれくらいですか！？
@@ -295,7 +295,7 @@ export default function Home() {
         )}
 
         {/* STEP 7: 希望職柄 */}
-        {step === 7 && (
+        {step === 6 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               希望する職柄を選択してください！
@@ -320,7 +320,7 @@ export default function Home() {
         )}
 
         {/* STEP 8: 志望企業群 */}
-        {step === 8 && (
+        {step === 7 && (
           <>
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
               志望企業群を選択してください！（複数選択可）
