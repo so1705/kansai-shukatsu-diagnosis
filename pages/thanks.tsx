@@ -10,30 +10,8 @@ export default function Thanks() {
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
           \  注意  /<br />
-          分析結果をより正確なものにして送るために<br />
-          以下の手順に従ってください！<br />
-          　　　　　　　　　　　　　<br/>
-          ①下記詳細フォームのご記入をお願いします！<br/>
-          （雑にしてしまうと分析が正確にできないので、<br/>
-          お手数ですが正確な回答をお願いいたします。）
-          <div className="mt-8 mb-4">
-            <span className="block text-base md:text-lg text-[#223a50] font-bold">
-            </span>
-          </div>
-           <div className="flex flex-row justify-center items-center gap-16 mt-8 mb-2">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSeVAxpAKaIvARwsVu9hj7tgZw28IIZM2QVDYhxVke-BGVba4A/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-white border-2 border-[#C5B358] rounded-xl font-bold shadow hover:bg-[#20b96a] transition text-lg text-[#168f52] hover:text-white"
-              style={{ letterSpacing: "0.04em" }}
-            >
-              詳細フォーム
-            </a>
-          </div>
-        </div>
-        <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
-          ②こちらを追加してメッセージ送信お願いします！<br />
+          分析結果はLINEで送らせていただきます<br />
+          下記リンクから追加をし、メッセージを送信して今しばらくお待ちください。<br />
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
             </span>

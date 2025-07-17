@@ -92,7 +92,7 @@ export default function Home() {
 
   const goQuestions = () => {
     if (!extra.feedbackMethod) return setError("フィードバックの受け取り方法を入力してください！");
-    if (!extra.username) return setError("インスタのユーザー名かLINEの名前を入力してください！");
+    if (!extra.username) return setError("LINEの名前を入力してください！");
     if (!extra.grade) return setError("学年を選択してください");
     if (!extra.department) return setError("大学名を入力してください");
     if (!extra.concern) return setError("現在就活で悩んでいることを選択してください！");
@@ -152,45 +152,17 @@ export default function Home() {
           </>
         )}
 
-        {/* STEP 1: フィードバック受け取り方法 */}
+        {/* STEP 2: ユーザー名 */}
         {step === 1 && (
           <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              フィードバックしてほしい<br />
-              媒体を入力してください<br />
-              <span className="text-base font-normal text-gray-500">(インスタ or 公式LINE)</span>
+              結果は公式LINEでフィードバックさせていただきます！<br />
+              LINEの名前を入力してください<br/>
+              （アンケート最後に追加リンクあるのでご安心ください）
             </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
-              placeholder="例：インスタ or 公式LINE"
-              value={extra.feedbackMethod}
-              onChange={(e) => handleFeedbackMethod(e.target.value)}
-              maxLength={40}
-            />
-            {error && <div className="text-red-500 text-base mb-3">{error}</div>}
-            <button
-              onClick={() =>
-                extra.feedbackMethod
-                  ? setStep(step + 1)
-                  : setError("フィードバックの受け取り方法を入力してください")
-              }
-              className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
-            >
-              次へ
-            </button>
-          </div>
-        )}
-
-        {/* STEP 2: ユーザー名 */}
-        {step === 2 && (
-          <div className="w-full flex flex-col items-center relative">
-            <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              インスタのユーザー名<br />
-              またはLINEの名前を入力してください
-            </h2>
-            <input
-              className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
-              placeholder="例：insta: @xxxx、LINE: 田中太郎"
+              placeholder="例:LINE: 田中太郎"
               value={extra.username}
               onChange={(e) => handleUsername(e.target.value)}
               maxLength={40}
@@ -208,14 +180,6 @@ export default function Home() {
             </button>
             {/* 画像 */}
             <div className="flex flex-row justify-center gap-4 mt-10 w-full">
-              <Image
-                src="/username-illust1.png"
-                alt="イラスト1"
-                width={190}
-                height={190}
-                className="rounded-xl drop-shadow-md"
-                priority
-              />
               <Image
                 src="/username-illust2.png"
                 alt="イラスト2"
