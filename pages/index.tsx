@@ -157,7 +157,7 @@ export default function Home() {
             </h2>
             <input
               className="w-full border border-gray-300 rounded-xl px-6 py-5 text-2xl mb-4"
-              placeholder="例:LINE: 田中太郎"
+              placeholder="例:インスタ:abc11,LINE: 田中太郎"
               value={extra.username}
               onChange={(e) => handleUsername(e.target.value)}
               maxLength={40}
@@ -167,13 +167,23 @@ export default function Home() {
               onClick={() =>
                 extra.username
                   ? setStep(step + 1)
-                  : setError("ユーザー名を入力してください")
+                  : setError("インスタとLINEのユーザー名を入力してください")
               }
               className="w-full py-6 bg-orange-400 hover:bg-orange-500 text-black text-2xl font-bold rounded-xl shadow-md"
             >
               次へ
             </button>
             {/* 画像 */}
+             <div className="flex flex-row justify-center gap-4 mt-10 w-full">
+              <Image
+                src="/username-illust1.png"
+                alt="イラスト1"
+                width={190}
+                height={190}
+                className="rounded-xl drop-shadow-md"
+                priority
+              />
+            </div>
             <div className="flex flex-row justify-center gap-4 mt-10 w-full">
               <Image
                 src="/username-illust2.png"
