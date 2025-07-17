@@ -71,6 +71,9 @@ export default function SelectFeedback() {
               診断結果と丁寧なフィードバックをメールでお届け！
             </span>
           </button>
+          <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
+          ※次のページもあります<br />
+          </div>
         </div>
       </div>
     </div>
