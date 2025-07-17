@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 const initialExtra = {
-  feedbackMethod: "",
   username: "",
   grade: "",
   department: "",
@@ -49,10 +48,6 @@ export default function Home() {
   const [error, setError] = useState("");
 
   // 各入力ハンドラ
-  const handleFeedbackMethod = (v: string) => {
-    setExtra({ ...extra, feedbackMethod: v });
-    setError("");
-  };
   const handleUsername = (v: string) => {
     setExtra({ ...extra, username: v });
     setError("");
@@ -91,7 +86,6 @@ export default function Home() {
   };
 
   const goQuestions = () => {
-    if (!extra.feedbackMethod) return setError("フィードバックの受け取り方法を入力してください！");
     if (!extra.username) return setError("LINEの名前を入力してください！");
     if (!extra.grade) return setError("学年を選択してください");
     if (!extra.department) return setError("大学名を入力してください");
@@ -102,7 +96,6 @@ export default function Home() {
     router.push({
       pathname: "/questions",
       query: {
-        feedbackMethod: extra.feedbackMethod,
         username: extra.username,
         grade: extra.grade,
         department: extra.department,
