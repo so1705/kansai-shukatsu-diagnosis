@@ -149,7 +149,7 @@ export default function Home() {
         {step === 1 && (
           <div className="w-full flex flex-col items-center relative">
             <h2 className="text-xl md:text-2xl font-bold mb-5 text-[#1d3144] text-center">
-              LINEの名前を入力してください<br/>
+              インスタとLINEの名前を入力してください<br/>
             </h2>
             <h2 className="text-xs md:text-sm mb-5 text-[#1d3144] text-center">
             結果は公式LINEでフィードバックさせていただきます！<br />
