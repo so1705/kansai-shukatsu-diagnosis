@@ -10,8 +10,8 @@ export default function Thanks() {
         </div>
         <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
           \  注意  /<br />
-          分析結果はLINEで送らせていただきます<br />
-          下記リンクから追加をし、メッセージを送信して今しばらくお待ちください。<br />
+          分析結果はLINEで送らせていただきます！<br />
+          下記リンクから追加後、「1」とメッセージを送信してお待ちください。<br />
           <div className="mt-8 mb-4">
             <span className="block text-base md:text-lg text-[#223a50] font-bold">
             </span>
