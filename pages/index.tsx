@@ -121,14 +121,16 @@ export default function IndexPage() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <h2 className="text-sm md:text-2xl font-bold text-center mb-8"> より正確な自己分析結果のために<br/>
-        下記詳細の入力お願いします！</h2>
+        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> より正確な自己分析結果のために<br/>
+        下記詳細の入力お願いします！</div>
         <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
-          <h2 className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 text-center">生年月日</h2>
+          <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">生年月日</label>
           {select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}
+          </div>
           <div className="w-full space-y-6 text-lg">
           {select("性別", "gender", genders)}
           <div className="w-full space-y-6 text-lg"></div>
@@ -151,7 +153,7 @@ export default function IndexPage() {
           {select("学部", "faculty", faculties)}</div>
           <div className="w-full space-y-6 text-lg">
           {select("学年", "grade", grades)}</div>
-          <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
+          <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("卒業月", "graduateMonth", graduateMonths)}</div>
           <h2 className="font-bold">希望業界</h2>
           {select("第一希望", "industry1", industries)}
           {select("第二希望", "industry2", industries, true)}
