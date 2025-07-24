@@ -31,18 +31,32 @@ export default function QuestionsPage() {
   useEffect(() => {
     if (answers.length === questions.length) {
       axios.post("/api/sendToDiscord", {
-        feedbackMethod,
-        username,
-        grade,
-        department,
-        concern, // ← ここを追加！
-        income,
-        jobType,
-        companies: companyArr,
-        answers,
-      }).then(() => {
-        router.replace("/SelectFeedback");
-      });
+  feedbackMethod,
+  username,
+  grade,
+  department,
+  concern,
+  income,
+  jobType,
+  companies: companyArr,
+  answers,
+}).then(() => {
+  // ← ここにスプレッドシート用の送信処理を追加
+  axios.post("/api/saveToSheets", {
+    feedbackMethod,
+    username,
+    grade,
+    department,
+    concern,
+    income,
+    jobType,
+    companies: companyArr,
+    answers,
+  });
+
+  // そのあと診断結果ページに遷移
+  router.replace("/SelectFeedback");
+});
     }
   }, [answers]);
 
