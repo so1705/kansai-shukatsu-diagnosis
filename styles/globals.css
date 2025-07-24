@@ -5,3 +5,7 @@
 body {
   background: #faf7f2;
 }
+
+.input {
+  @apply border border-gray-300 rounded px-4 py-3 text-lg w-full mb-3;
+}
