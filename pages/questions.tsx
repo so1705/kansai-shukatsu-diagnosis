@@ -7,10 +7,23 @@ import axios from "axios";
 
 export default function QuestionsPage() {
   const router = useRouter();
-  const { feedbackMethod, username, grade, department, income, jobType, companies, concern } = router.query;
+  const {
+    feedbackMethod,
+    username,
+    lineName,
+    fullName,
+    department,
+    grade,
+    industry1,
+    industry2,
+    industry3,
+    job1,
+    job2,
+    job3,
+  } = router.query;
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
-  const companyArr = typeof companies === "string" ? companies.split(",") : [];
 
   const handleAnswer = (ans: string) => {
     setAnswers([...answers, ans]);
@@ -28,24 +41,32 @@ export default function QuestionsPage() {
     if (answers.length === questions.length) {
       axios.post("/api/sendToDiscord", {
         feedbackMethod,
-        username,
-        grade,
+        username,        // インスタ名
+        lineName,         // LINE名
+        fullName,         // 本名
         department,
-        concern,
-        income,
-        jobType,
-        companies: companyArr,
+        grade,
+        industry1,
+        industry2,
+        industry3,
+        job1,
+        job2,
+        job3,
         answers,
       }).then(() => {
         axios.post("/api/saveToSheets", {
           feedbackMethod,
           username,
-          grade,
+          lineName,
+          fullName,
           department,
-          concern,
-          income,
-          jobType,
-          companies: companyArr,
+          grade,
+          industry1,
+          industry2,
+          industry3,
+          job1,
+          job2,
+          job3,
           answers,
         });
 
@@ -55,6 +76,7 @@ export default function QuestionsPage() {
   }, [answers]);
 
   useEffect(() => {
+    setAnswers([]);
     if (!username) router.replace("/");
   }, [username]);
 

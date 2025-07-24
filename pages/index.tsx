@@ -53,39 +53,47 @@ export default function IndexPage() {
   };
 
   const handleSubmit = async () => {
-    if (!validate()) return;
-    try {
-      await axios.post("/api/sendToDiscord", {
-        ...extra,
-        name: `${extra.lastName}${extra.firstName}`,
-        birth: `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`,
-        graduate: `${extra.graduateYear}${extra.graduateMonth}`
-      });
-      await axios.post("/api/saveToSheets", {
-        ...extra,
-        fullName: `${extra.lastName} ${extra.firstName}`,
-        birth: `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`
-      });
-      router.push({
-        pathname: "/questions",
-        query: {
-          feedbackMethod: "フォーム入力",
-          username: `${extra.lastName}${extra.firstName}`,
-          grade: extra.grade,
-          department: extra.university,
-          concern: "",
-          income: "",
-          jobType: extra.job1,
-          companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(",")
-        }
-      });
-    } catch (err: any) {
-      setError("送信に失敗しました：" + err.message);
-    }
-  };
+  if (!validate()) return;
+  try {
+    const fullName = `${extra.lastName}${extra.firstName}`;
+    const birth = `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`;
+    const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
+
+    await axios.post("/api/sendToDiscord", {
+      ...extra,
+      name: fullName,           // 本名（姓＋名）として明示
+      lineName: extra.line,     // LINEユーザー名として明示
+      birth,
+      graduate,
+    });
+
+    await axios.post("/api/saveToSheets", {
+      ...extra,
+      fullName: `${extra.lastName} ${extra.firstName}`,
+      birth,
+    });
+
+    router.push({
+      pathname: "/questions",
+      query: {
+        feedbackMethod: "フォーム入力",
+        username: fullName,
+        grade: extra.grade,
+        department: extra.university,
+        concern: "",
+        income: "",
+        jobType: extra.job1,
+        companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(","),
+      },
+    });
+  } catch (err: any) {
+    setError("送信に失敗しました：" + err.message);
+  }
+};
+
 
   const input = (placeholder: string, key: keyof typeof extra) => (
-    <input placeholder={placeholder} className="input w-full max-w-md mx-auto" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
+    <input placeholder={placeholder} className="input" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
   );
 
   const select = (
@@ -97,7 +105,7 @@ export default function IndexPage() {
   const placeholder = optional 
 
   return (
-    <div className="mb-4 w-full max-w-md mx-auto text-left">
+    <div className="mb-4">
       <label className="block font-semibold mb-1">
         {label}
         {optional && <span className="text-sm text-gray-400">（任意）</span>}
@@ -105,7 +113,7 @@ export default function IndexPage() {
       <select
         value={extra[key]}
         onChange={(e) => setExtra({ ...extra, [key]: e.target.value })}
-        className="input w-full"
+        className="input"
       >
         <option value="" disabled hidden>{placeholder}</option>
         {list.map((v) => (
@@ -119,29 +127,29 @@ export default function IndexPage() {
 
   return (
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-lg py-10 px-6">
+      <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <div className="text-xl font-bold text-[#223a50] mb-6"> <br/>より正確な自己分析結果のために<br/>
+        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> <br/>より正確な自己分析のために<br/>
         下記詳細の入力お願いします！
         <br/>
         <br/>
         </div>
         <div className="mb-4 text-lg">
-          <label className="block font-semibold mb-4 text-sm">
+          <label className="block font-semibold mb-1">
             フィードバックは公式ラインでさせていただきます！
             <br/>
             本人確認の為にお手数ですが必要なのでご記入ください！
             <br/>
-            （最後のページに追加URLあります。）
+            （最後のページにLINE追加URLあります。）
             　　　<br/>
             </label>
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="mb-4 text-lg">
-          <label className="block font-semibold mt-6 mb-2">お名前</label>
+          <label className="block font-semibold mb-1">お名前</label>
           {input("姓", "lastName")}{input("名", "firstName")}</div>
           <div className="mb-4 text-lg">
-          <label className="block font-semibold mt-6 mb-2">生年月日</label>
+          <label className="block font-semibold mb-1">生年月日</label>
           {select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}
           </div>
           <div className="w-full space-y-6 text-lg">
@@ -149,17 +157,17 @@ export default function IndexPage() {
           <div className="w-full space-y-6 text-lg"></div>
           {select("現住所(都道府県)", "address", prefectures)}
           <div className="mb-4 text-lg">
-          <label className="block font-semibold mt-6 mb-2">電話番号</label>
+          <label className="block font-semibold mb-1">電話番号</label>
           {input("電話番号（ハイフンなし）", "phone")}
           </div>
 
           <div className="mb-4 text-lg">
-          <label className="block font-semibold mt-6 mb-2">メールアドレス</label>
+          <label className="block font-semibold mb-1">メールアドレス</label>
         　{input("メールアドレス", "email")}
           </div>
 
           <div className="mb-4 text-lg">
-          <label className="block font-semibold mt-6 mb-2">大学名</label>
+          <label className="block font-semibold mb-1">大学名</label>
           {input("大学名（〇〇大学）", "university")}
           </div>
           <div className="w-full space-y-6 text-lg">
@@ -167,20 +175,20 @@ export default function IndexPage() {
           <div className="w-full space-y-6 text-lg">
           {select("学年", "grade", grades)}</div>
           <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("卒業月", "graduateMonth", graduateMonths)}</div>
-          <h2 className="font-bold mt-6 mb-2">希望業界</h2>
+          <h2 className="font-bold">希望業界</h2>
           {select("第一希望", "industry1", industries)}
           {select("第二希望", "industry2", industries, true)}
           {select("第三希望", "industry3", industries, true)}
-          <h2 className="font-bold mt-6 mb-2">希望職種</h2>
+          <h2 className="font-bold">希望職種</h2>
           {select("第一希望", "job1", jobs)}
           {select("第二希望", "job2", jobs, true)}
           {select("第三希望", "job3", jobs, true)}
-          <h2 className="font-bold mt-6 mb-2">希望勤務地</h2>
+          <h2 className="font-bold">希望勤務地</h2>
           {select("第一希望", "location1", prefectures)}
           {select("第二希望", "location2", prefectures, true)}
           {select("第三希望", "location3", prefectures, true)}
           {error && <p className="text-red-500 text-center">{error}</p>}
-          <button onClick={handleSubmit} className="w-full max-w-md py-4 bg-blue-600 text-white font-bold rounded-lg mt-8">
+          <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
             診断スタート！
           </button>
         </div>
