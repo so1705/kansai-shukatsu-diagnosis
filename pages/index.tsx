@@ -122,8 +122,18 @@ export default function IndexPage() {
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
         <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> より正確な自己分析結果のために<br/>
-        下記詳細の入力お願いします！</div>
-        <div className="w-full space-y-6 text-lg">
+        下記詳細の入力お願いします！
+        <br/>
+        <br/>
+        </div>
+        <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">
+            フィードバックは公式ラインでさせていただきます！
+            <br/>
+            本人確認の為にお手数ですが必要なのでご記入ください！
+            <br/>
+            （最後のページに追加URLあります。）
+            </label>
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="mb-4 text-lg">
