@@ -1,8 +1,6 @@
-// pages/index.tsx
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Image from "next/image"; // 追加：ロゴ表示用
 
 // セレクト項目リスト
 const years = Array.from({ length: 30 }, (_, i) => `${1995 + i}年`);
@@ -76,11 +74,11 @@ export default function IndexPage() {
   );
 
   const select = (label: string, key: keyof typeof extra, list: string[], optional = false) => (
-    <div>
+    <div className="w-full">
       <label className="font-semibold">
         {label}{optional && <span className="text-sm text-gray-400">（任意）</span>}
       </label>
-      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input">
+      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input w-full">
         <option value="">{label}</option>
         {list.map((v) => <option key={v}>{v}</option>)}
       </select>
@@ -88,39 +86,40 @@ export default function IndexPage() {
   );
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4 space-y-6 text-lg text-center">
-      <div className="flex justify-center mb-6">
-        <Image src="/logo.png" alt="ロゴ" width={200} height={80} />
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-[#faf7f2]">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md py-10 px-6">
+        <h1 className="text-xl font-bold text-center mb-6">自己分析スタート前の入力フォーム</h1>
+        <div className="space-y-4">
+          {input("Instagramユーザー名", "instagram")}
+          {input("LINEユーザー名", "line")}
+          <div className="flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
+          <div className="flex gap-2 justify-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+          {select("性別", "gender", genders)}
+          {select("現住所（都道府県）", "address", prefectures)}
+          {input("電話番号", "phone")}
+          {input("メールアドレス", "email")}
+          {input("大学名", "university")}
+          {select("学部名", "faculty", faculties)}
+          {select("学年", "grade", grades)}
+          <div className="flex gap-2 justify-center">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
+          <h2 className="font-bold">希望業界</h2>
+          {select("希望業界①", "industry1", industries)}
+          {select("希望業界②", "industry2", industries, true)}
+          {select("希望業界③", "industry3", industries, true)}
+          <h2 className="font-bold">希望職種</h2>
+          {select("希望職種①", "job1", jobs)}
+          {select("希望職種②", "job2", jobs, true)}
+          {select("希望職種③", "job3", jobs, true)}
+          <h2 className="font-bold">希望勤務地</h2>
+          {select("勤務地①", "location1", prefectures)}
+          {select("勤務地②", "location2", prefectures, true)}
+          {select("勤務地③", "location3", prefectures, true)}
+          {error && <p className="text-red-500">{error}</p>}
+          <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
+            診断スタート！
+          </button>
+        </div>
       </div>
-      <h1 className="text-3xl font-bold text-center mb-4">自己分析スタート前の入力フォーム</h1>
-      {input("Instagramユーザー名", "instagram")}
-      {input("LINEユーザー名", "line")}
-      <div className="flex gap-2 justify-center">{input("姓", "lastName")}{input("名", "firstName")}</div>
-      <div className="flex gap-2 justify-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
-      {select("性別", "gender", genders)}
-      {select("現住所（都道府県）", "address", prefectures)}
-      {input("電話番号", "phone")}
-      {input("メールアドレス", "email")}
-      {input("大学名", "university")}
-      {select("学部名", "faculty", faculties)}
-      {select("学年", "grade", grades)}
-      <div className="flex gap-2 justify-center">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
-      <h2 className="font-bold">希望業界</h2>
-      {select("希望業界①", "industry1", industries)}
-      {select("希望業界②", "industry2", industries, true)}
-      {select("希望業界③", "industry3", industries, true)}
-      <h2 className="font-bold">希望職種</h2>
-      {select("希望職種①", "job1", jobs)}
-      {select("希望職種②", "job2", jobs, true)}
-      {select("希望職種③", "job3", jobs, true)}
-      <h2 className="font-bold">希望勤務地</h2>
-      {select("勤務地①", "location1", prefectures)}
-      {select("勤務地②", "location2", prefectures, true)}
-      {select("勤務地③", "location3", prefectures, true)}
-      {error && <p className="text-red-500">{error}</p>}
-      <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
-        診断スタート！
-      </button>
     </div>
   );
 }
