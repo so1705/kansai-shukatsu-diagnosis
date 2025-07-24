@@ -126,7 +126,9 @@ export default function IndexPage() {
         <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
-          <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
+          <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">お名前</label>
+          {input("姓", "lastName")}{input("名", "firstName")}</div>
           <div className="mb-4 text-lg">
           <label className="block font-semibold mb-1">生年月日</label>
           {select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}
