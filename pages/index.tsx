@@ -94,7 +94,7 @@ export default function IndexPage() {
   list: string[],
   optional = false
 ) => {
-  const placeholder = optional ? "（任意）選択してください" : "選択してください";
+  const placeholder = optional 
 
   return (
     <div className="mb-4">
@@ -121,26 +121,28 @@ export default function IndexPage() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <h1 className="text-sm md:text-2xl font-bold text-center mb-8"> より正確な自己分析結果のために<br/>
-        下記詳細の入力お願いします！</h1>
+        <h2 className="text-sm md:text-2xl font-bold text-center mb-8"> より正確な自己分析結果のために<br/>
+        下記詳細の入力お願いします！</h2>
         <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
           <h2 className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 text-center">生年月日</h2>
           {select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}
-          <h2 className="space-y-4">性別</h2>
-          {select("", "gender", genders)}
-          <h2 className="space-y-4">現住所（都道府県）</h2>
-          {select("", "address", prefectures)}
           <div className="w-full space-y-6 text-lg">
-          {input("電話番号", "phone")}
+          {select("性別", "gender", genders)}
+          <div className="w-full space-y-6 text-lg"></div>
+          {select("現住所(都道府県)", "address", prefectures)}
+          <h2 className="w-full space-y-6 text-lg">電話番号</h2>
+          {input("電話番号(ハイフンなし)", "phone")}
+          <h2 className="w-full space-y-6 text-lg">メールアドレス</h2>
           {input("メールアドレス", "email")}
+          <h2 className="w-full space-y-6 text-lg">大学名</h2>
           {input("大学名 (〇〇大学)", "university")}</div>
-          <h2 className="space-y-4">学部</h2>
-          {select("", "faculty", faculties)}
-          <h2 className="space-y-4">学年</h2>
-          {select("", "grade", grades)}
+          <div className="w-full space-y-6 text-lg">
+          {select("学部", "faculty", faculties)}</div>
+          <div className="w-full space-y-6 text-lg">
+          {select("学年", "grade", grades)}</div>
           <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
           <h2 className="font-bold">希望業界</h2>
           {select("第一希望", "industry1", industries)}
