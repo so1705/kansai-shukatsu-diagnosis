@@ -133,7 +133,7 @@ export default function IndexPage() {
             本人確認の為にお手数ですが必要なのでご記入ください！
             <br/>
             （最後のページに追加URLあります。）
-            <br/>
+            　　　<br/>
             </label>
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
