@@ -1,14 +1,16 @@
-// pages/index.tsx
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import axios from "axios";
+import Image from "next/image";
 
+// セレクト項目リスト
 const years = Array.from({ length: 30 }, (_, i) => `${1995 + i}年`);
 const months = Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
 const days = Array.from({ length: 31 }, (_, i) => `${i + 1}日`);
 const genders = ["男性", "女性", "その他"];
-const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+const prefectures = [
+  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
+];
 const grades = ["1回生", "2回生", "3回生", "4回生"];
 const graduateYears = ["2026年", "2027年", "2028年", "2029年"];
 const graduateMonths = ["3月", "9月"];
@@ -64,22 +66,34 @@ export default function IndexPage() {
         fullName: `${extra.lastName} ${extra.firstName}`,
         birth: `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`
       });
-      router.push({ pathname: "/questions", query: extra });
+      router.push({
+        pathname: "/questions",
+        query: {
+          feedbackMethod: "フォーム入力",
+          username: `${extra.lastName}${extra.firstName}`,
+          grade: extra.grade,
+          department: extra.university,
+          concern: "",
+          income: "",
+          jobType: extra.job1,
+          companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(",")
+        }
+      });
     } catch (err: any) {
       setError("送信に失敗しました：" + err.message);
     }
   };
 
   const input = (placeholder: string, key: keyof typeof extra) => (
-    <input placeholder={placeholder} className="w-full border border-gray-300 rounded-xl px-4 py-3 text-lg" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
+    <input placeholder={placeholder} className="input" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
   );
 
   const select = (label: string, key: keyof typeof extra, list: string[], optional = false) => (
-    <div className="w-full">
+    <div>
       <label className="font-semibold">
         {label}{optional && <span className="text-sm text-gray-400">（任意）</span>}
       </label>
-      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="w-full border border-gray-300 rounded-xl px-4 py-3 text-lg">
+      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input">
         <option value="">{label}</option>
         {list.map((v) => <option key={v}>{v}</option>)}
       </select>
@@ -88,12 +102,10 @@ export default function IndexPage() {
 
   return (
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-lg px-6 py-10 flex flex-col items-center">
-        <div className="mb-6">
-          <Image src="/logo.png" alt="ロゴ" width={160} height={100} />
-        </div>
-        <h1 className="text-xl font-bold text-center mb-6">自己分析スタート前の入力フォーム</h1>
-        <div className="space-y-4 w-full">
+      <div className="w-full max-w-3xl flex flex-col items-center">
+        <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
+        <h1 className="text-xl md:text-2xl font-bold text-center mb-8">自己分析スタート前の入力フォーム</h1>
+        <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
