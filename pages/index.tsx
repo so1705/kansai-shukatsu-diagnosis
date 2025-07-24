@@ -133,12 +133,20 @@ export default function IndexPage() {
           {select("性別", "gender", genders)}
           <div className="w-full space-y-6 text-lg"></div>
           {select("現住所(都道府県)", "address", prefectures)}
-          <h2 className="w-full space-y-6 text-lg">電話番号</h2>
-          {input("電話番号(ハイフンなし)", "phone")}
-          <h2 className="w-full space-y-6 text-lg">メールアドレス</h2>
-          {input("メールアドレス", "email")}
-          <h2 className="w-full space-y-6 text-lg">大学名</h2>
-          {input("大学名 (〇〇大学)", "university")}</div>
+          <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">電話番号</label>
+          {input("電話番号（ハイフンなし）", "phone")}
+          </div>
+
+          <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">メールアドレス</label>
+        　{input("メールアドレス", "email")}
+          </div>
+
+          <div className="mb-4 text-lg">
+          <label className="block font-semibold mb-1">大学名</label>
+          {input("大学名（〇〇大学）", "university")}
+          </div>
           <div className="w-full space-y-6 text-lg">
           {select("学部", "faculty", faculties)}</div>
           <div className="w-full space-y-6 text-lg">
