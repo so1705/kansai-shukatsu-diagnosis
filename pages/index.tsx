@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Image from "next/image"; // 追加：ロゴ表示用
 
 // セレクト項目リスト
 const years = Array.from({ length: 30 }, (_, i) => `${1995 + i}年`);
@@ -64,20 +65,7 @@ export default function IndexPage() {
         fullName: `${extra.lastName} ${extra.firstName}`,
         birth: `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`
       });
-
-      // 必要最低限のクエリで渡す（username は Discord 表示名にも使用）
-      router.push({
-        pathname: "/questions",
-        query: {
-          username: extra.instagram || `${extra.lastName}${extra.firstName}`,
-          grade: extra.grade,
-          department: extra.university,
-          income: "希望年収未入力",
-          jobType: extra.job1,
-          companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(","),
-          concern: "自己分析や業界分析"
-        }
-      });
+      router.push({ pathname: "/questions", query: extra });
     } catch (err: any) {
       setError("送信に失敗しました：" + err.message);
     }
@@ -100,12 +88,15 @@ export default function IndexPage() {
   );
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4 space-y-6 text-lg">
+    <div className="max-w-3xl mx-auto py-10 px-4 space-y-6 text-lg text-center">
+      <div className="flex justify-center mb-6">
+        <Image src="/logo.png" alt="ロゴ" width={200} height={80} />
+      </div>
       <h1 className="text-3xl font-bold text-center mb-4">自己分析スタート前の入力フォーム</h1>
       {input("Instagramユーザー名", "instagram")}
       {input("LINEユーザー名", "line")}
-      <div className="flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
-      <div className="flex gap-2">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+      <div className="flex gap-2 justify-center">{input("姓", "lastName")}{input("名", "firstName")}</div>
+      <div className="flex gap-2 justify-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
       {select("性別", "gender", genders)}
       {select("現住所（都道府県）", "address", prefectures)}
       {input("電話番号", "phone")}
@@ -113,7 +104,7 @@ export default function IndexPage() {
       {input("大学名", "university")}
       {select("学部名", "faculty", faculties)}
       {select("学年", "grade", grades)}
-      <div className="flex gap-2">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
+      <div className="flex gap-2 justify-center">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
       <h2 className="font-bold">希望業界</h2>
       {select("希望業界①", "industry1", industries)}
       {select("希望業界②", "industry2", industries, true)}
