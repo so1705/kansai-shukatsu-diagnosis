@@ -121,7 +121,7 @@ export default function IndexPage() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> より正確な自己分析結果のために<br/>
+        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> <br/>より正確な自己分析結果のために<br/>
         下記詳細の入力お願いします！
         <br/>
         <br/>
@@ -133,6 +133,7 @@ export default function IndexPage() {
             本人確認の為にお手数ですが必要なのでご記入ください！
             <br/>
             （最後のページに追加URLあります。）
+            <br/>
             </label>
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
