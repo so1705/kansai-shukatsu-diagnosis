@@ -88,17 +88,34 @@ export default function IndexPage() {
     <input placeholder={placeholder} className="input" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
   );
 
-  const select = (label: string, key: keyof typeof extra, list: string[], optional = false) => (
-    <div>
-      <label className="font-semibold">
-        {label}{optional && <span className="text-sm text-gray-400">（任意）</span>}
+  const select = (
+  label: string,
+  key: keyof typeof extra,
+  list: string[],
+  optional = false
+) => {
+  const placeholder = optional ? "（任意）選択してください" : "選択してください";
+
+  return (
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {label}
+        {optional && <span className="text-sm text-gray-400">（任意）</span>}
       </label>
-      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input">
-        <option value="">{label}</option>
-        {list.map((v) => <option key={v}>{v}</option>)}
+      <select
+        value={extra[key]}
+        onChange={(e) => setExtra({ ...extra, [key]: e.target.value })}
+        className="input"
+      >
+        <option value="" disabled hidden>{placeholder}</option>
+        {list.map((v) => (
+          <option key={v} value={v}>{v}</option>
+        ))}
       </select>
     </div>
   );
+};
+
 
   return (
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
