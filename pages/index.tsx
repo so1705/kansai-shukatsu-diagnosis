@@ -104,19 +104,23 @@ export default function IndexPage() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <h1 className="text-xl md:text-2xl font-bold text-center mb-8">自己分析スタート前の入力フォーム</h1>
+        <h1 className="text-sm md:text-2xl font-bold text-center mb-8"> より正確な自己分析結果のために<br/>
+        下記詳細の入力お願いします！</h1>
         <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
-          <div className="w-full space-y-6 text-lg">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
-          {select("性別", "gender", genders)}
-          {select("現住所（都道府県）", "address", prefectures)}
+          <div className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 text-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+          <div className="space-y-4">
+          {select("", "gender", genders)}
+          {select("", "address", prefectures)}</div>
+          <div className="w-full space-y-6 text-lg">
           {input("電話番号", "phone")}
           {input("メールアドレス", "email")}
-          {input("大学名", "university")}
-          {select("学部名", "faculty", faculties)}
-          {select("学年", "grade", grades)}
+          {input("大学名 (〇〇大学)", "university")}</div>
+          <div className="space-y-4">
+          {select("", "faculty", faculties)}
+          {select("", "grade", grades)}</div>
           <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
           <h2 className="font-bold">希望業界</h2>
           {select("希望業界①", "industry1", industries)}
