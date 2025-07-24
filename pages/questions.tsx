@@ -61,7 +61,7 @@ export default function QuestionsPage() {
   return (
     <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 text-center">
       {/* === 上部ロゴ === */}
-      <div className="w-full flex justify-center pt-8">
+      <div className="w-full max-w-md flex flex-col items-center pt-8">
         <Image
           src="/logo.png"
           alt="ロゴ"
@@ -73,7 +73,7 @@ export default function QuestionsPage() {
       </div>
 
       {/* 質問・選択肢カード */}
-      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center justify-center py-16 px-6 min-h-[500px] relative mb-14 text-center">
+      <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-16 px-6 min-h-[500px] relative mb-14 text-center">
         {/* === 進捗表示＆プログレスバー === */}
         <div className="w-full mb-5 text-center">
           <div className="text-[#1976d2] text-sm font-bold mb-1">
@@ -84,16 +84,16 @@ export default function QuestionsPage() {
 
         {/* 設問エリア */}
         {step < questions.length ? (
-          <div className="w-full flex flex-col items-center justify-center text-center">
+          <div className="w-full flex flex-col items-center text-center">
             <div className="font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50]">
               {questions[step].question}
             </div>
-            <div className="flex flex-col w-full gap-8 items-center justify-center">
+            <div className="flex flex-col w-full gap-8 items-center">
               {questions[step].options.map((opt: string, i: number) => (
                 <button
                   key={i}
                   onClick={() => handleAnswer(opt)}
-                  className="w-full max-w-md py-6 text-2xl md:text-3xl font-bold bg-[#f7fafc] border-2 border-gray-200 rounded-2xl shadow hover:bg-[#fff3e0] hover:border-[#ffb94c] transition text-[#223a50] text-center"
+                  className="w-full py-6 text-2xl md:text-3xl font-bold bg-[#f7fafc] border-2 border-gray-200 rounded-2xl shadow hover:bg-[#fff3e0] hover:border-[#ffb94c] transition text-[#223a50] text-center"
                   style={{ letterSpacing: "0.03em" }}
                 >
                   {opt}
