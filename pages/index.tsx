@@ -64,7 +64,20 @@ export default function IndexPage() {
         fullName: `${extra.lastName} ${extra.firstName}`,
         birth: `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`
       });
-      router.push({ pathname: "/questions", query: extra });
+
+      // 必要最低限のクエリで渡す（username は Discord 表示名にも使用）
+      router.push({
+        pathname: "/questions",
+        query: {
+          username: extra.instagram || `${extra.lastName}${extra.firstName}`,
+          grade: extra.grade,
+          department: extra.university,
+          income: "希望年収未入力",
+          jobType: extra.job1,
+          companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(","),
+          concern: "自己分析や業界分析"
+        }
+      });
     } catch (err: any) {
       setError("送信に失敗しました：" + err.message);
     }
