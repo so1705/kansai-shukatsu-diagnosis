@@ -1,13 +1,16 @@
+// pages/index.tsx
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Image from "next/image";
 
-// セレクト項目リスト
 const years = Array.from({ length: 30 }, (_, i) => `${1995 + i}年`);
 const months = Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
 const days = Array.from({ length: 31 }, (_, i) => `${i + 1}日`);
 const genders = ["男性", "女性", "その他"];
-const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+const prefectures = [
+  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
+];
 const grades = ["1回生", "2回生", "3回生", "4回生"];
 const graduateYears = ["2026年", "2027年", "2028年", "2029年"];
 const graduateMonths = ["3月", "9月"];
@@ -70,15 +73,15 @@ export default function IndexPage() {
   };
 
   const input = (placeholder: string, key: keyof typeof extra) => (
-    <input placeholder={placeholder} className="input" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
+    <input placeholder={placeholder} className="input w-full px-4 py-2 border rounded-md" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
   );
 
   const select = (label: string, key: keyof typeof extra, list: string[], optional = false) => (
     <div className="w-full">
-      <label className="font-semibold">
+      <label className="font-semibold block mb-1">
         {label}{optional && <span className="text-sm text-gray-400">（任意）</span>}
       </label>
-      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input w-full">
+      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input w-full px-3 py-2 border rounded-md">
         <option value="">{label}</option>
         {list.map((v) => <option key={v}>{v}</option>)}
       </select>
@@ -86,14 +89,20 @@ export default function IndexPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-[#faf7f2]">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md py-10 px-6">
-        <h1 className="text-xl font-bold text-center mb-6">自己分析スタート前の入力フォーム</h1>
-        <div className="space-y-4">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 py-10">
+      <div className="mb-6">
+        <Image src="/logo.png" alt="ロゴ" width={200} height={80} />
+      </div>
+      <div className="w-full max-w-2xl bg-white rounded-xl shadow-md px-8 py-10 space-y-6 text-lg text-center">
+        <h1 className="text-xl font-bold text-center">自己分析スタート前の入力フォーム</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
-          <div className="flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
-          <div className="flex gap-2 justify-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+          {input("姓", "lastName")}
+          {input("名", "firstName")}
+          {select("年", "birthYear", years)}
+          {select("月", "birthMonth", months)}
+          {select("日", "birthDay", days)}
           {select("性別", "gender", genders)}
           {select("現住所（都道府県）", "address", prefectures)}
           {input("電話番号", "phone")}
@@ -101,24 +110,22 @@ export default function IndexPage() {
           {input("大学名", "university")}
           {select("学部名", "faculty", faculties)}
           {select("学年", "grade", grades)}
-          <div className="flex gap-2 justify-center">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
-          <h2 className="font-bold">希望業界</h2>
+          {select("卒業年", "graduateYear", graduateYears)}
+          {select("卒業月", "graduateMonth", graduateMonths)}
           {select("希望業界①", "industry1", industries)}
           {select("希望業界②", "industry2", industries, true)}
           {select("希望業界③", "industry3", industries, true)}
-          <h2 className="font-bold">希望職種</h2>
           {select("希望職種①", "job1", jobs)}
           {select("希望職種②", "job2", jobs, true)}
           {select("希望職種③", "job3", jobs, true)}
-          <h2 className="font-bold">希望勤務地</h2>
           {select("勤務地①", "location1", prefectures)}
           {select("勤務地②", "location2", prefectures, true)}
           {select("勤務地③", "location3", prefectures, true)}
-          {error && <p className="text-red-500">{error}</p>}
-          <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
-            診断スタート！
-          </button>
         </div>
+        {error && <p className="text-red-500">{error}</p>}
+        <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
+          診断スタート！
+        </button>
       </div>
     </div>
   );
