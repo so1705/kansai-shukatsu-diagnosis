@@ -110,30 +110,33 @@ export default function IndexPage() {
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
           <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
-          <div className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 text-center">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
-          <div className="space-y-4">
+          <h2 className="w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 text-center">生年月日</h2>
+          {select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}
+          <h2 className="space-y-4">性別</h2>
           {select("", "gender", genders)}
-          {select("", "address", prefectures)}</div>
+          <h2 className="space-y-4">現住所（都道府県）</h2>
+          {select("", "address", prefectures)}
           <div className="w-full space-y-6 text-lg">
           {input("電話番号", "phone")}
           {input("メールアドレス", "email")}
           {input("大学名 (〇〇大学)", "university")}</div>
-          <div className="space-y-4">
+          <h2 className="space-y-4">学部</h2>
           {select("", "faculty", faculties)}
-          {select("", "grade", grades)}</div>
+          <h2 className="space-y-4">学年</h2>
+          {select("", "grade", grades)}
           <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
           <h2 className="font-bold">希望業界</h2>
-          {select("希望業界①", "industry1", industries)}
-          {select("希望業界②", "industry2", industries, true)}
-          {select("希望業界③", "industry3", industries, true)}
+          {select("第一希望", "industry1", industries)}
+          {select("第二希望", "industry2", industries, true)}
+          {select("第三希望", "industry3", industries, true)}
           <h2 className="font-bold">希望職種</h2>
-          {select("希望職種①", "job1", jobs)}
-          {select("希望職種②", "job2", jobs, true)}
-          {select("希望職種③", "job3", jobs, true)}
+          {select("第一希望", "job1", jobs)}
+          {select("第二希望", "job2", jobs, true)}
+          {select("第三希望", "job3", jobs, true)}
           <h2 className="font-bold">希望勤務地</h2>
-          {select("勤務地①", "location1", prefectures)}
-          {select("勤務地②", "location2", prefectures, true)}
-          {select("勤務地③", "location3", prefectures, true)}
+          {select("第一希望", "location1", prefectures)}
+          {select("第二希望", "location2", prefectures, true)}
+          {select("第三希望", "location3", prefectures, true)}
           {error && <p className="text-red-500 text-center">{error}</p>}
           <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
             診断スタート！
