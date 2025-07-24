@@ -14,6 +14,5 @@ body {
   margin: 0 auto 1rem auto; /* ← 左右中央寄せ */
   border: 1px solid #ccc;
   border-radius: 0.5rem;
-  font-size: 1rem;
   text-align: center; /* ← 入力文字も中央 */
 }
