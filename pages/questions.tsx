@@ -12,7 +12,7 @@ export default function QuestionsPage() {
     username,
     lineName,
     fullName,
-    department,
+    university,
     grade,
     industry1,
     industry2,
@@ -39,39 +39,22 @@ export default function QuestionsPage() {
 
   useEffect(() => {
     if (answers.length === questions.length) {
-      axios.post("/api/sendToDiscord", {
-        feedbackMethod,
-        username,        // インスタ名
-        lineName,         // LINE名
-        fullName,         // 本名
-        department,
-        grade,
-        industry1,
-        industry2,
-        industry3,
-        job1,
-        job2,
-        job3,
-        answers,
-      }).then(() => {
-        axios.post("/api/saveToSheets", {
-          feedbackMethod,
-          username,
-          lineName,
-          fullName,
-          department,
-          grade,
-          industry1,
-          industry2,
-          industry3,
-          job1,
-          job2,
-          job3,
-          answers,
-        });
+      const message = `【自己分析フォーム送信通知】\n\n` +
+        `■Instagram：${username || "（未入力）"}\n` +
+        `■LINEユーザー名：${lineName || "（未入力）"}\n` +
+        `■氏名：${fullName || "（未入力）"}\n` +
+        `■大学名：${university || "（未入力）"}\n` +
+        `■学年：${grade || "（未入力）"}\n\n` +
+        `【希望】\n` +
+        `■希望業界：${industry1 || "（未入力）"} ／ ${industry2 || "（なし）"} ／ ${industry3 || "（なし）"}\n` +
+        `■希望職種：${job1 || "（未入力）"} ／ ${job2 || "（なし）"} ／ ${job3 || "（なし）"}\n\n` +
+        `■フィードバックタイプ：${feedbackMethod || "（未入力）"}\n\n` +
+        `【設問回答（全${answers.length}問）】\n` +
+        answers.map((a, i) => `Q${i + 1}: ${a}`).join("\n");
 
-        router.replace("/SelectFeedback");
-      });
+      axios.post("/api/sendToDiscord", { content: message })
+        .then(() => router.replace("/SelectFeedback"))
+        .catch((e) => console.error("送信エラー：", e));
     }
   }, [answers]);
 
@@ -79,6 +62,7 @@ export default function QuestionsPage() {
     setAnswers([]);
     if (!username) router.replace("/");
   }, [username]);
+
 
   return (
     <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 text-center">
