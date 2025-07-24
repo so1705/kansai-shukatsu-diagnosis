@@ -59,13 +59,13 @@ export default function IndexPage() {
     const birth = `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`;
     const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
 
-    await axios.post("/api/sendToDiscord", {
-      ...extra,
-      name: fullName,           // 本名（姓＋名）として明示
-      lineName: extra.line,     // LINEユーザー名として明示
-      birth,
-      graduate,
-    });
+    //await axios.post("/api/sendToDiscord", {
+      //...extra,
+      //name: fullName,           // 本名（姓＋名）として明示
+      //lineName: extra.line,     // LINEユーザー名として明示
+      //birth,
+      //graduate,
+    //});
 
     await axios.post("/api/saveToSheets", {
       ...extra,
@@ -73,8 +73,23 @@ export default function IndexPage() {
       birth,
     });
 
-    router.push("/questions");
-
+    router.push({
+  pathname: "/questions",
+  query: {
+    feedbackMethod: "フォーム入力",
+    username: extra.instagram,
+    lineName: extra.line,
+    fullName: fullName,
+    university: extra.university,
+    grade: extra.grade,
+    industry1: extra.industry1,
+    industry2: extra.industry2,
+    industry3: extra.industry3,
+    job1: extra.job1,
+    job2: extra.job2,
+    job3: extra.job3,
+  },
+});
   } catch (err: any) {
     setError("送信に失敗しました：" + err.message);
   }
