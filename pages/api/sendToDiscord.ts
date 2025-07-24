@@ -1,3 +1,4 @@
+// pages/api/sendToDiscord.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
@@ -9,15 +10,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const {
-    username,         // Instagram名
-    lineName,         // LINEユーザー名
-    fullName,         // フルネーム（姓＋名）
-    university,       // 大学名
-    grade,            // 学年
-    industry1, industry2, industry3,   // 希望業界
-    job1, job2, job3,                  // 希望職種
-    feedbackType,     // フィードバックタイプ
-    answers           // 設問回答（配列）
+    username,
+    lineName,
+    fullName,
+    university,
+    grade,
+    industry1, industry2, industry3,
+    job1, job2, job3,
+    feedbackType,
+    answers
   } = req.body;
 
   const content = `

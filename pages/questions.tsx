@@ -37,44 +37,40 @@ export default function QuestionsPage() {
   };
 
   useEffect(() => {
+    if (!username) router.replace("/");
+  }, [username]);
+
+  useEffect(() => {
     if (answers.length === questions.length) {
-      const answersEncoded = encodeURIComponent(JSON.stringify(answers));
+      const query = {
+        feedbackMethod,
+        username,
+        lineName,
+        fullName,
+        university,
+        grade,
+        industry1,
+        industry2,
+        industry3,
+        job1,
+        job2,
+        job3,
+        answers: JSON.stringify(answers),
+      };
       router.replace({
         pathname: "/SelectFeedback",
-        query: {
-          username,
-          lineName,
-          fullName,
-          university,
-          grade,
-          industry1,
-          industry2,
-          industry3,
-          job1,
-          job2,
-          job3,
-          answers: answersEncoded,
-        },
+        query,
       });
     }
   }, [answers]);
 
-  useEffect(() => {
-    setAnswers([]);
-    if (!username) router.replace("/");
-  }, [username]);
-
-
   return (
     <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center px-4 text-center">
-      {/* === 上部ロゴ === */}
       <div className="w-full max-w-md flex justify-center pt-8">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" priority />
       </div>
 
-      {/* カード本体 */}
       <div className="w-full max-w-md bg-white rounded-[2rem] shadow-lg flex flex-col items-center py-16 px-6 min-h-[500px] mb-14 text-center">
-        {/* === 進捗表示＆プログレスバー === */}
         <div className="w-full mb-5">
           <div className="text-[#1976d2] text-sm font-bold mb-1 text-center">
             進捗 {step + 1} / {questions.length}
@@ -82,7 +78,6 @@ export default function QuestionsPage() {
           <ProgressBar now={step + 1} max={questions.length} />
         </div>
 
-        {/* === 設問と選択肢 === */}
         {step < questions.length ? (
           <div className="w-full flex flex-col items-center text-center">
             <div className="font-extrabold text-2xl md:text-3xl mb-8 text-[#223a50] max-w-xs mx-auto">
@@ -101,7 +96,6 @@ export default function QuestionsPage() {
                 </button>
               ))}
 
-              {/* 戻るボタン */}
               {step > 0 && (
                 <button
                   onClick={handleBack}
@@ -116,7 +110,6 @@ export default function QuestionsPage() {
           <div className="text-center py-20 text-xl">診断結果を送信中...</div>
         )}
 
-        {/* === 下部イラスト === */}
         {questions[step]?.image && (
           <div className="mt-12 flex justify-center">
             <Image

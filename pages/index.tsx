@@ -74,18 +74,22 @@ export default function IndexPage() {
     });
 
     router.push({
-      pathname: "/questions",
-      query: {
-        feedbackMethod: "フォーム入力",
-        username: fullName,
-        grade: extra.grade,
-        department: extra.university,
-        concern: "",
-        income: "",
-        jobType: extra.job1,
-        companies: [extra.industry1, extra.industry2, extra.industry3].filter(Boolean).join(","),
-      },
-    });
+  pathname: "/questions",
+  query: {
+    feedbackMethod: "フォーム入力",
+    username: extra.instagram,
+    lineName: extra.line,
+    fullName: fullName,
+    university: extra.university,
+    grade: extra.grade,
+    industry1: extra.industry1,
+    industry2: extra.industry2,
+    industry3: extra.industry3,
+    job1: extra.job1,
+    job2: extra.job2,
+    job3: extra.job3,
+  },
+});
   } catch (err: any) {
     setError("送信に失敗しました：" + err.message);
   }
