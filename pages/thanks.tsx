@@ -12,7 +12,7 @@ export default function Thanks() {
       username, lineName, fullName, lastName, firstName, birthdate, gender,
       phone, email, address, university, faculty, grade, gradYear, gradMonth,
       industry1, industry2, industry3,
-      occupation1, occupation2, occupation3,
+      job1, job2, job3,
       location1, location2, location3
     } = router.query;
 
@@ -40,9 +40,9 @@ export default function Thanks() {
         industry1,
         industry2,
         industry3,
-        occupation1,
-        occupation2,
-        occupation3,
+        job1,
+        job2,
+        job3,
         location1,
         location2,
         location3
