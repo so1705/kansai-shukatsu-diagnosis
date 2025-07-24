@@ -9,30 +9,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const {
-    instagram, line, lineName, lastName, firstName, university, grade,
-    industry1, industry2, industry3,
-    job1, job2, job3,
-    feedbackMethod, answers  // ← 追加ポイント
+    username,         // Instagram名
+    lineName,         // LINEユーザー名
+    fullName,         // フルネーム（姓＋名）
+    university,       // 大学名
+    grade,            // 学年
+    industry1, industry2, industry3,   // 希望業界
+    job1, job2, job3,                  // 希望職種
+    feedbackType,     // フィードバックタイプ
+    answers           // 設問回答（配列）
   } = req.body;
-
-  const name = `${lastName}${firstName}`;
 
   const content = `
 【自己分析フォーム送信通知】
 
-■Instagram：${instagram}
-■LINEユーザー名：${lineName || line}
-■氏名：${name}
-■大学名：${university}
-■学年：${grade}
+■Instagram：${username || "（未入力）"}
+■LINEユーザー名：${lineName || "（未入力）"}
+■氏名：${fullName || "（未入力）"}
+■大学名：${university || "（未入力）"}
+■学年：${grade || "（未入力）"}
 
 【希望】
-■希望業界：${industry1} ／ ${industry2 || "（なし）"} ／ ${industry3 || "（なし）"}
-■希望職種：${job1} ／ ${job2 || "（なし）"} ／ ${job3 || "（なし）"}
+■希望業界：${industry1 || "（未入力）"} ／ ${industry2 || "（なし）"} ／ ${industry3 || "（なし）"}
+■希望職種：${job1 || "（未入力）"} ／ ${job2 || "（なし）"} ／ ${job3 || "（なし）"}
 
-■フィードバックタイプ：${feedbackMethod}
+■フィードバックタイプ：${feedbackType || "（未入力）"}
 
-【設問回答（全40問）】
+【設問回答（全${answers?.length || 0}問）】
 ${(answers || []).map((ans: string, idx: number) => `Q${idx + 1}: ${ans}`).join("\n")}
 `;
 

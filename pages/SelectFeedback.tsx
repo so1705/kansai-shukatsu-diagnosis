@@ -1,34 +1,55 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useEffect, useRef } from "react";
 
 export default function SelectFeedback() {
   const router = useRouter();
   const {
     username,
+    lineName,
+    fullName,
+    university,
     grade,
-    department,
-    income,
-    jobType,
-    companies,
+    industry1,
+    industry2,
+    industry3,
+    job1,
+    job2,
+    job3,
     answers
   } = router.query;
 
+  const hasSubmitted = useRef(false);
+
   const handleSelect = async (type: string) => {
+    if (hasSubmitted.current) return;
+    hasSubmitted.current = true;
+
     try {
-      await axios.post("/api/sendToDiscord", {
-        username,
-        grade,
-        department,
-        income,
-        jobType,
-        companies: companies?.toString().split(","),
-        answers: answers ? JSON.parse(answers as string) : [],
-        feedbackType: type,
-      });
+      const parsedAnswers = answers
+        ? JSON.parse(decodeURIComponent(answers as string))
+        : [];
+
+      const message = `【自己分析フォーム送信通知】\n\n` +
+        `■Instagram：${username || "（未入力）"}\n` +
+        `■LINEユーザー名：${lineName || "（未入力）"}\n` +
+        `■氏名：${fullName || "（未入力）"}\n` +
+        `■大学名：${university || "（未入力）"}\n` +
+        `■学年：${grade || "（未入力）"}\n\n` +
+        `【希望】\n` +
+        `■希望業界：${industry1 || "（未入力）"} ／ ${industry2 || "（なし）"} ／ ${industry3 || "（なし）"}\n` +
+        `■希望職種：${job1 || "（未入力）"} ／ ${job2 || "（なし）"} ／ ${job3 || "（なし）"}\n\n` +
+        `■フィードバックタイプ：${type}\n\n` +
+        `【設問回答（全${parsedAnswers.length}問）】\n` +
+        parsedAnswers.map((a: string, i: number) => `Q${i + 1}: ${a}`).join("\n");
+
+      await axios.post("/api/sendToDiscord", { content: message });
+
       router.push("/thanks");
-    } catch (err) {
+    } catch (err: any) {
       alert("送信エラー：" + err?.message);
+      hasSubmitted.current = false; // 再送信を許可
     }
   };
 

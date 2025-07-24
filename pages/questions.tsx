@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import questions from "../data/questions";
 import ProgressBar from "../components/ProgressBar";
 import Image from "next/image";
-import axios from "axios";
 
 export default function QuestionsPage() {
   const router = useRouter();
@@ -39,22 +38,24 @@ export default function QuestionsPage() {
 
   useEffect(() => {
     if (answers.length === questions.length) {
-      const message = `【自己分析フォーム送信通知】\n\n` +
-        `■Instagram：${username || "（未入力）"}\n` +
-        `■LINEユーザー名：${lineName || "（未入力）"}\n` +
-        `■氏名：${fullName || "（未入力）"}\n` +
-        `■大学名：${university || "（未入力）"}\n` +
-        `■学年：${grade || "（未入力）"}\n\n` +
-        `【希望】\n` +
-        `■希望業界：${industry1 || "（未入力）"} ／ ${industry2 || "（なし）"} ／ ${industry3 || "（なし）"}\n` +
-        `■希望職種：${job1 || "（未入力）"} ／ ${job2 || "（なし）"} ／ ${job3 || "（なし）"}\n\n` +
-        `■フィードバックタイプ：${feedbackMethod || "（未入力）"}\n\n` +
-        `【設問回答（全${answers.length}問）】\n` +
-        answers.map((a, i) => `Q${i + 1}: ${a}`).join("\n");
-
-      axios.post("/api/sendToDiscord", { content: message })
-        .then(() => router.replace("/SelectFeedback"))
-        .catch((e) => console.error("送信エラー：", e));
+      const answersEncoded = encodeURIComponent(JSON.stringify(answers));
+      router.replace({
+        pathname: "/SelectFeedback",
+        query: {
+          username,
+          lineName,
+          fullName,
+          university,
+          grade,
+          industry1,
+          industry2,
+          industry3,
+          job1,
+          job2,
+          job3,
+          answers: answersEncoded,
+        },
+      });
     }
   }, [answers]);
 
