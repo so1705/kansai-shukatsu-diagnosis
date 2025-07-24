@@ -73,23 +73,8 @@ export default function IndexPage() {
       birth,
     });
 
-    router.push({
-  pathname: "/questions",
-  query: {
-    feedbackMethod: "フォーム入力",
-    username: extra.instagram,
-    lineName: extra.line,
-    fullName: fullName,
-    university: extra.university,
-    grade: extra.grade,
-    industry1: extra.industry1,
-    industry2: extra.industry2,
-    industry3: extra.industry3,
-    job1: extra.job1,
-    job2: extra.job2,
-    job3: extra.job3,
-  },
-});
+    router.push("/questions");
+
   } catch (err: any) {
     setError("送信に失敗しました：" + err.message);
   }

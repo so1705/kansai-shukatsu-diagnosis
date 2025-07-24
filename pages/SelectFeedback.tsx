@@ -53,6 +53,7 @@ export default function SelectFeedback() {
       hasSubmitted.current = false;
     }
   };
+
   return (
     <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4">
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-12 px-6 flex flex-col items-center">
@@ -74,7 +75,7 @@ export default function SelectFeedback() {
         </div>
         <div className="w-full flex flex-col gap-6">
           <button
-            onClick={() => handleSelect("interview")}
+            onClick={() => handleSelect("面談希望")}
             className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
           >
             <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋無料オンライン面談</span>
@@ -84,7 +85,7 @@ export default function SelectFeedback() {
             </span>
           </button>
           <button
-            onClick={() => handleSelect("resultOnly")}
+            onClick={() => handleSelect("メール")}
             className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
           >
             <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋メールでフィードバック</span>
