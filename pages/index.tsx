@@ -108,8 +108,8 @@ export default function IndexPage() {
         <div className="w-full space-y-6 text-lg">
           {input("Instagramユーザー名", "instagram")}
           {input("LINEユーザー名", "line")}
-          <div className="flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
-          <div className="flex gap-2">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+          <div className="w-full space-y-6 text-lg">{input("姓", "lastName")}{input("名", "firstName")}</div>
+          <div className="w-full space-y-6 text-lg">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
           {select("性別", "gender", genders)}
           {select("現住所（都道府県）", "address", prefectures)}
           {input("電話番号", "phone")}
@@ -117,7 +117,7 @@ export default function IndexPage() {
           {input("大学名", "university")}
           {select("学部名", "faculty", faculties)}
           {select("学年", "grade", grades)}
-          <div className="flex gap-2">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
+          <div className="w-full space-y-6 text-lg">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
           <h2 className="font-bold">希望業界</h2>
           {select("希望業界①", "industry1", industries)}
           {select("希望業界②", "industry2", industries, true)}
