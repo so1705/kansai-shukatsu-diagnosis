@@ -102,7 +102,7 @@ export default function IndexPage() {
 
   return (
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-3xl flex flex-col items-center">
+      <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
         <h1 className="text-xl md:text-2xl font-bold text-center mb-8">自己分析スタート前の入力フォーム</h1>
         <div className="w-full space-y-6 text-lg">

@@ -7,7 +7,13 @@ body {
 }
 
 .input {
-  @apply border rounded px-4 py-3 text-lg w-full mb-3;
-  border-color: #D1D5DB; /* ← これが border-gray-300 */
+  display: block;
+  max-width: 400px; /* ← 追加 */
+  width: 100%;
+  padding: 1rem;
+  margin: 0 auto 1rem auto; /* ← 左右中央寄せ */
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  text-align: center; /* ← 入力文字も中央 */
 }
-
