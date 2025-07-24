@@ -70,15 +70,15 @@ export default function IndexPage() {
   };
 
   const input = (placeholder: string, key: keyof typeof extra) => (
-    <input placeholder={placeholder} className="input w-full px-4 py-2 border rounded-lg" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
+    <input placeholder={placeholder} className="input w-full" value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} />
   );
 
   const select = (label: string, key: keyof typeof extra, list: string[], optional = false) => (
     <div className="w-full">
-      <label className="font-semibold block mb-1 text-center">
+      <label className="font-semibold">
         {label}{optional && <span className="text-sm text-gray-400">（任意）</span>}
       </label>
-      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input w-full px-4 py-2 border rounded-lg">
+      <select value={extra[key]} onChange={(e) => setExtra({ ...extra, [key]: e.target.value })} className="input w-full">
         <option value="">{label}</option>
         {list.map((v) => <option key={v}>{v}</option>)}
       </select>
@@ -86,39 +86,33 @@ export default function IndexPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start pt-8 px-4">
-      <img src="/logo.png" alt="関西就活ロゴ" className="w-60 h-auto mb-4" />
-      <h1 className="text-2xl font-bold text-center mb-6">自己分析スタート前の入力フォーム</h1>
-      <div className="w-full max-w-xl flex flex-col gap-4 items-center text-center">
-        <div className="flex gap-2 w-full">{input("Instagramユーザー名", "instagram")}{input("LINEユーザー名", "line")}</div>
-        <div className="flex gap-2 w-full">{input("姓", "lastName")}{input("名", "firstName")}</div>
-        <div className="flex gap-2 w-full">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
+    <div className="min-h-screen flex flex-col items-center justify-start py-10 px-4 bg-white">
+      <img src="/logo.png" alt="関西就活ロゴ" className="w-40 h-auto mb-4" />
+      <div className="w-full max-w-3xl space-y-6 text-lg flex flex-col items-center">
+        <h1 className="text-2xl font-bold text-center">自己分析スタート前の入力フォーム</h1>
+        <div className="w-full flex gap-2">{input("Instagramユーザー名", "instagram")}{input("LINEユーザー名", "line")}</div>
+        <div className="w-full flex gap-2">{input("姓", "lastName")}{input("名", "firstName")}</div>
+        <div className="w-full flex gap-2">{select("年", "birthYear", years)}{select("月", "birthMonth", months)}{select("日", "birthDay", days)}</div>
         {select("性別", "gender", genders)}
         {select("現住所（都道府県）", "address", prefectures)}
-        <div className="flex gap-2 w-full">{input("電話番号", "phone")}{input("メールアドレス", "email")}</div>
-        {input("大学名", "university")}
+        <div className="w-full flex gap-2">{input("電話番号", "phone")}{input("メールアドレス", "email")}{input("大学名", "university")}</div>
         {select("学部名", "faculty", faculties)}
         {select("学年", "grade", grades)}
-        <div className="flex gap-2 w-full">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
-
-        <h2 className="font-bold mt-6">希望業界</h2>
+        <div className="w-full flex gap-2">{select("卒業年", "graduateYear", graduateYears)}{select("月", "graduateMonth", graduateMonths)}</div>
+        <h2 className="font-bold">希望業界</h2>
         {select("希望業界①", "industry1", industries)}
         {select("希望業界②", "industry2", industries, true)}
         {select("希望業界③", "industry3", industries, true)}
-
-        <h2 className="font-bold mt-6">希望職種</h2>
+        <h2 className="font-bold">希望職種</h2>
         {select("希望職種①", "job1", jobs)}
         {select("希望職種②", "job2", jobs, true)}
         {select("希望職種③", "job3", jobs, true)}
-
-        <h2 className="font-bold mt-6">希望勤務地</h2>
+        <h2 className="font-bold">希望勤務地</h2>
         {select("勤務地①", "location1", prefectures)}
         {select("勤務地②", "location2", prefectures, true)}
         {select("勤務地③", "location3", prefectures, true)}
-
-        {error && <p className="text-red-500 text-center">{error}</p>}
-
-        <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-4">
+        {error && <p className="text-red-500">{error}</p>}
+        <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
           診断スタート！
         </button>
       </div>
