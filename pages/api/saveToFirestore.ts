@@ -19,18 +19,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       now.getSeconds()
     );
 
-    // 🔒 二重送信チェック（同じemailで±1秒以内のtimestampが存在するか）
-    const q = query(
-      collection(db, "database"),
-     // where("email", "==", email),
-      where("timestamp", ">=", Timestamp.fromDate(new Date(timestamp.getTime() - 1000))),
-      where("timestamp", "<=", Timestamp.fromDate(new Date(timestamp.getTime() + 1000)))
-    );
+    // 🔒 二重送信チェック（email + timestampの±1秒）
+    //const q = query(
+      //collection(db, "database"),
+      //where("email", "==", email),
+      //where("timestamp", ">=", Timestamp.fromDate(new Date(timestamp.getTime() - 1000))),
+      //where("timestamp", "<=", Timestamp.fromDate(new Date(timestamp.getTime() + 1000)))
+    //);
 
-    const existing = await getDocs(q);
-    if (!existing.empty) {
-      return res.status(409).json({ error: "Duplicate submission" });
-    }
+    //const existing = await getDocs(q);
+    //if (!existing.empty) {
+      //return res.status(409).json({ error: "Duplicate submission" });
+    //}
 
     // 🌟 Firestoreに保存
     const data = { ...req.body, timestamp: now };
