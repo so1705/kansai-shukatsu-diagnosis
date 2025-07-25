@@ -1,6 +1,6 @@
 // components/LogoutButton.tsx
-import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 
 export default function LogoutButton() {
@@ -8,13 +8,13 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.push("/");
+    router.push("/login");
   };
 
   return (
     <button
       onClick={handleLogout}
-      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+      className="text-sm text-gray-600 hover:underline"
     >
       ログアウト
     </button>
