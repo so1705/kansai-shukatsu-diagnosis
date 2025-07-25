@@ -9,6 +9,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const { email } = req.body;
+
+    if (!email) {
+      console.error("❗️emailフィールドが送られていません");
+      return res.status(400).json({ error: "Missing email field" });
+    }
+
     const now = new Date();
     const timestamp = new Date(
       now.getFullYear(),
@@ -19,7 +25,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       now.getSeconds()
     );
 
-    // 🔒 二重送信チェック（同じemailで±1秒以内のtimestampが存在するか）
     const q = query(
       collection(db, "database"),
       where("email", "==", email),
@@ -32,14 +37,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(409).json({ error: "Duplicate submission" });
     }
 
-    // 🌟 Firestoreに保存
     const data = { ...req.body, timestamp: now };
+
+    // 追加ログ
+    console.log("📤 Firestoreに保存中のデータ:", data);
+
     const docRef = await addDoc(collection(db, "database"), data);
     return res.status(200).json({ id: docRef.id });
 
-  } catch (err) {
-    console.error("保存エラー:", err);
-    return res.status(500).json({ error: "Internal error" });
+  } catch (err: any) {
+    console.error("🔥 Firestore保存中のサーバーエラー:", err);
+    return res.status(500).json({ error: "Internal server error", detail: err.message });
   }
 };
 
