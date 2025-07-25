@@ -1,12 +1,30 @@
-// pages/admin.tsx
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Link from "next/link";
-import { db } from "../lib/firebase";
+import { db, auth } from "../lib/firebase";
+import { useRouter } from "next/router";
 
 const AdminPage = () => {
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
   const [dataList, setDataList] = useState<any[]>([]);
 
+  // 管理者のUID（自分のGoogleログインUIDに差し替えてください）
+  const ADMIN_UID = "ここに自分のUIDを入れてください";
+
+  // ログイン状態の確認
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user && user.uid === ADMIN_UID) {
+        setAuthorized(true);
+      } else {
+        router.push("/admin/login");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Firestoreからデータを取得
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(db, "database"));
     const docs = querySnapshot.docs.map((doc) => ({
@@ -24,8 +42,8 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (authorized) fetchData();
+  }, [authorized]);
 
   const fieldOrder = [
     "fullName", "lastName", "firstName", "birth", "gender",
@@ -62,6 +80,8 @@ const AdminPage = () => {
     location2: "希望勤務地②",
     location3: "希望勤務地③",
   };
+
+  if (!authorized) return <p>認証中...</p>;
 
   return (
     <div className="p-4">
