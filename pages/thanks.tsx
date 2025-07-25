@@ -7,21 +7,20 @@ export default function Thanks() {
   const router = useRouter();
 
   useEffect(() => {
-    // クエリパラメータから情報を取得
     const {
       username, lineName, fullName, lastName, firstName, birthdate, gender,
       phone, email, address, university, faculty, grade, gradYear, gradMonth,
       industry1, industry2, industry3,
       job1, job2, job3,
-      location1, location2, location3
+      location1, location2, location3,
     } = router.query;
 
-    // Google Sheets用に保存
-    fetch("/api/saveToSheets", {
+    // Firestoreへ保存（/api/saveToFirestoreを呼び出す）
+    fetch("/api/saveToFirestore", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString(), // 任意で追加
         username,
         lineName,
         fullName,
@@ -45,9 +44,16 @@ export default function Thanks() {
         job3,
         location1,
         location2,
-        location3
+        location3,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Firestore保存成功:", data);
+      })
+      .catch((err) => {
+        console.error("Firestore保存エラー:", err);
+      });
   }, [router.query]);
 
   return (

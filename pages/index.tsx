@@ -67,11 +67,11 @@ export default function IndexPage() {
       //graduate,
     //});
 
-    await axios.post("/api/saveToSheets", {
-      ...extra,
-      fullName: `${extra.lastName} ${extra.firstName}`,
-      birth,
-    });
+    await axios.post("/api/saveToFirestore", {
+    ...extra,
+    fullName: `${extra.lastName} ${extra.firstName}`,
+    birth,
+ });
 
     router.push({
   pathname: "/questions",
