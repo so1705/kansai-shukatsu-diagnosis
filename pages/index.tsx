@@ -75,10 +75,9 @@ export default function IndexPage() {
 
     router.push({
   pathname: "/questions",
-  query: {
-    username: extra.instagram,
-  },
+  query: { username: extra.instagram },
 });
+
 
   } catch (err: any) {
   console.error("Firestore保存 or 遷移エラー：", err);
