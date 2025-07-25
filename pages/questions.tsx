@@ -58,7 +58,7 @@ export default function QuestionsPage() {
         answers: JSON.stringify(answers),
       };
       router.push({
-        pathname: "/select-feedback",
+        pathname: "/SelectFeedback",
         query: {
         username,
         lineName,
