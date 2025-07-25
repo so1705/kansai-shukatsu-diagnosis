@@ -56,7 +56,7 @@ export default function IndexPage() {
   if (!validate()) return;
   try {
     const fullName = `${extra.lastName}${extra.firstName}`;
-    const birth = `${extra.birthYear}-${extra.birthMonth}-${extra.birthDay}`;
+    const birth = `${extra.birthYear.replace("年", "")}-${extra.birthMonth.replace("月", "").padStart(2, "0")}-${extra.birthDay.replace("日", "").padStart(2, "0")}`;
     const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
 
     //await axios.post("/api/sendToDiscord", {
@@ -71,28 +71,19 @@ export default function IndexPage() {
     ...extra,
     fullName: `${extra.lastName} ${extra.firstName}`,
     birth,
- });
+   });
 
     router.push({
   pathname: "/questions",
   query: {
-    feedbackMethod: "フォーム入力",
     username: extra.instagram,
-    lineName: extra.line,
-    fullName: fullName,
-    university: extra.university,
-    grade: extra.grade,
-    industry1: extra.industry1,
-    industry2: extra.industry2,
-    industry3: extra.industry3,
-    job1: extra.job1,
-    job2: extra.job2,
-    job3: extra.job3,
   },
 });
+
   } catch (err: any) {
-    setError("送信に失敗しました：" + err.message);
-  }
+  console.error("Firestore保存 or 遷移エラー：", err);
+  setError("送信に失敗しました：" + err.message);
+}
 };
 
 
