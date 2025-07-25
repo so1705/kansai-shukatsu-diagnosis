@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { db } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
+import LogoutButton from "../components/LogoutButton";
 
 type DataItem = {
   id: string;
@@ -46,7 +47,21 @@ const fieldLabels: Record<string, string> = {
 
 export default function DataList() {
   const [dataList, setDataList] = useState<DataItem[]>([]);
+  const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
+
+  // 認証チェック
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user && user.uid === "MLmK2Gdh4dYtHyf2wmWTpCQu9RM2") {
+        setAuthorized(true);
+        fetchData(); // 認証通過後にデータ取得
+      } else {
+        router.push("/");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const fetchData = async () => {
     const snapshot = await getDocs(collection(db, "database"));
@@ -60,22 +75,22 @@ export default function DataList() {
   const handleDelete = async (id: string) => {
     const confirmDelete = confirm("このデータを削除しますか？");
     if (!confirmDelete) return;
-
     await deleteDoc(doc(db, "database", id));
-    fetchData(); // 再取得
+    fetchData();
   };
 
   const handleEdit = (id: string) => {
     router.push(`/edit/${id}`);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (!authorized) return <p>認証中...</p>;
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">登録データ一覧</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">登録データ一覧</h1>
+        <LogoutButton />
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-300 text-sm">
           <thead className="bg-gray-100">

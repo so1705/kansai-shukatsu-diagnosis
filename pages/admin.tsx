@@ -10,7 +10,7 @@ const AdminPage = () => {
   const [dataList, setDataList] = useState<any[]>([]);
 
   // 管理者のUID（自分のGoogleログインUIDに差し替えてください）
-  const ADMIN_UID = "ここに自分のUIDを入れてください";
+  const ADMIN_UID ="MLmK2Gdh4dYtHyf2wmWTpCQu9RM2";
 
   // ログイン状態の確認
   useEffect(() => {
