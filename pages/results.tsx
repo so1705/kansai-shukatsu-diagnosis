@@ -75,6 +75,7 @@ export default function IndexPage() {
         job2: extra.job2,
         job3: extra.job3,
         feedbackType: "フォーム入力",
+        answers, 
       });
 
       // Firestore保存
