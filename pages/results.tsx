@@ -74,7 +74,7 @@ export default function IndexPage() {
    });
 
     router.push({
-  pathname: "/questions",
+  pathname: "/thanks",
   query: {
     feedbackMethod: "フォーム入力",
     username: extra.instagram,
