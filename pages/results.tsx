@@ -157,7 +157,7 @@ export default function IndexPage() {
           <label className="block font-semibold mb-1">
             フィードバックは公式ラインでさせていただきます！
             <br/>
-            本人確認の為にお手数ですが必要なのでご記入ください！
+            本人確認の為にお手数ですが以下項目ご記入ください！
             <br/>
             （最後のページにLINE追加URLあります。）
             　　　<br/>
