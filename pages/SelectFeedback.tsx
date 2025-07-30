@@ -47,7 +47,7 @@ export default function SelectFeedback() {
         answers: parsedAnswers,
       });
 
-      router.push("/thanks");
+      router.push("/results");
     } catch (err: any) {
       alert("送信エラー：" + (err?.message || "不明なエラー"));
       hasSubmitted.current = false;
