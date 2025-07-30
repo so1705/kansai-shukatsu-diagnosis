@@ -36,9 +36,10 @@ export default function QuestionsPage() {
     }
   };
 
-  useEffect(() => {
-    if (!username) router.replace("/");
-  }, [username]);
+  // ❌ クエリ未入力時の強制リダイレクトは削除（or 必要なら後で復活させる）
+//   useEffect(() => {
+//     if (!username) router.replace("/");
+//   }, [username]);
 
   useEffect(() => {
     if (answers.length === questions.length) {
@@ -60,21 +61,10 @@ export default function QuestionsPage() {
       router.push({
         pathname: "/SelectFeedback",
         query: {
-        username,
-        lineName,
-        fullName,
-        university,
-        grade,
-        industry1,
-        industry2,
-        industry3,
-        job1,
-        job2,
-        job3,
-        answers: encodeURIComponent(JSON.stringify(answers)),
-      },
-    });
-
+          ...query,
+          answers: encodeURIComponent(JSON.stringify(answers)),
+        },
+      });
     }
   }, [answers]);
 
