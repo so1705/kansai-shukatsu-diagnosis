@@ -58,9 +58,9 @@ export default function IndexPage() {
     const fullName = `${extra.lastName}${extra.firstName}`;
     const birth = `${extra.birthYear.replace("年", "")}-${extra.birthMonth.replace("月", "").padStart(2, "0")}-${extra.birthDay.replace("日", "").padStart(2, "0")}`;
     const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
-    const { answers: rawAnswers } = router.query;
+    const { answers: rawAnswers, feedbackType } = router.query;
     const answers = rawAnswers ? JSON.parse(decodeURIComponent(rawAnswers as string)) : [];
-
+   
     // Discord送信
       await axios.post("/api/sendToDiscord", {
         username: extra.instagram,
@@ -74,7 +74,7 @@ export default function IndexPage() {
         job1: extra.job1,
         job2: extra.job2,
         job3: extra.job3,
-        feedbackType: "フォーム入力",
+        feedbackType,
         answers, 
       });
 
@@ -149,8 +149,7 @@ export default function IndexPage() {
     <div className="min-h-screen bg-[#fdf8f3] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col items-center mx-auto text-center">
         <Image src="/logo.png" alt="ロゴ" width={180} height={100} className="mb-4" />
-        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> <br/>より正確な自己分析のために<br/>
-        下記詳細の入力お願いします！
+        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center"> 
         <br/>
         <br/>
         </div>
@@ -209,7 +208,8 @@ export default function IndexPage() {
           {select("第三希望", "location3", prefectures, true)}
           {error && <p className="text-red-500 text-center">{error}</p>}
           <button onClick={handleSubmit} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg mt-6">
-            診断スタート！
+            診断結果を送信！<br/>
+            ※次のページに公式ラインURLあります！
           </button>
         </div>
       </div>

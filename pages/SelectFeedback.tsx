@@ -17,6 +17,7 @@ export default function SelectFeedback() {
     job2,
     job3,
     answers: rawAnswers,
+    feedbackType, 
   } = router.query;
 
   const answers = rawAnswers ? JSON.parse(decodeURIComponent(rawAnswers as string)) : [];
@@ -81,7 +82,7 @@ export default function SelectFeedback() {
             </span>
             <span className="text-sm font-light text-gray-400 leading-tight mt-1">
               診断結果の詳しい解説と、<br />
-              あなた専用のキャリア相談を個別にサポート！！
+              あなた専用のキャリア相談を就活メンターが個別にサポート！！
             </span>
           </button>
           <button
