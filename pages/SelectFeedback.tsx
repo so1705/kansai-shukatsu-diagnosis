@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { useRef } from "react";
 
 export default function SelectFeedback() {
@@ -27,29 +26,26 @@ export default function SelectFeedback() {
     hasSubmitted.current = true;
 
     try {
-      const parsedAnswers = answers
-        ? JSON.parse(decodeURIComponent(answers as string))
-        : [];
-
-      await axios.post("/api/sendToDiscord", {
-        username,
-        lineName,
-        fullName,
-        university,
-        grade,
-        industry1,
-        industry2,
-        industry3,
-        job1,
-        job2,
-        job3,
-        feedbackType: type,
-        answers: parsedAnswers,
+      router.push({
+        pathname: "/results",
+        query: {
+          username,
+          lineName,
+          fullName,
+          university,
+          grade,
+          industry1,
+          industry2,
+          industry3,
+          job1,
+          job2,
+          job3,
+          answers,
+          feedbackType: type,
+        },
       });
-
-      router.push("/results");
     } catch (err: any) {
-      alert("送信エラー：" + (err?.message || "不明なエラー"));
+      alert("遷移エラー：" + (err?.message || "不明なエラー"));
       hasSubmitted.current = false;
     }
   };
@@ -78,7 +74,9 @@ export default function SelectFeedback() {
             onClick={() => handleSelect("面談希望")}
             className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
           >
-            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋無料オンライン面談</span>
+            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">
+              分析結果＋無料オンライン面談
+            </span>
             <span className="text-sm font-light text-gray-400 leading-tight mt-1">
               診断結果の詳しい解説と、<br />
               あなた専用のキャリア相談を個別にサポート！！
@@ -88,14 +86,16 @@ export default function SelectFeedback() {
             onClick={() => handleSelect("メール")}
             className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
           >
-            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋メールでフィードバック</span>
+            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">
+              分析結果＋メールでフィードバック
+            </span>
             <span className="text-sm font-light text-gray-400 leading-tight mt-1">
               診断結果と丁寧なフィードバックをメールでお届け！
             </span>
           </button>
           <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
-          　　　　　　　　　　　<br/>
-          ※次のページもあります<br />
+            <br />
+            ※次のページもあります<br />
           </div>
         </div>
       </div>

@@ -59,44 +59,54 @@ export default function IndexPage() {
     const birth = `${extra.birthYear.replace("年", "")}-${extra.birthMonth.replace("月", "").padStart(2, "0")}-${extra.birthDay.replace("日", "").padStart(2, "0")}`;
     const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
 
-    //await axios.post("/api/sendToDiscord", {
-      //...extra,
-      //name: fullName,           // 本名（姓＋名）として明示
-      //lineName: extra.line,     // LINEユーザー名として明示
-      //birth,
-      //graduate,
-    //});
+    // Discord送信
+      await axios.post("/api/sendToDiscord", {
+        username: extra.instagram,
+        lineName: extra.line,
+        fullName: fullName,
+        university: extra.university,
+        grade: extra.grade,
+        industry1: extra.industry1,
+        industry2: extra.industry2,
+        industry3: extra.industry3,
+        job1: extra.job1,
+        job2: extra.job2,
+        job3: extra.job3,
+        feedbackType: "フォーム入力",
+        answers: [], // 設問データがあればここに格納
+      });
 
-    await axios.post("/api/saveToFirestore", {
-    ...extra,
-    fullName: `${extra.lastName} ${extra.firstName}`,
-    birth,
-   });
+      // Firestore保存
+      await axios.post("/api/saveToFirestore", {
+        ...extra,
+        fullName,
+        birth,
+      });
 
-    router.push({
-  pathname: "/thanks",
-  query: {
-    feedbackMethod: "フォーム入力",
-    username: extra.instagram,
-    lineName: extra.line,
-    fullName: fullName,
-    university: extra.university,
-    grade: extra.grade,
-    industry1: extra.industry1,
-    industry2: extra.industry2,
-    industry3: extra.industry3,
-    job1: extra.job1,
-    job2: extra.job2,
-    job3: extra.job3,
-  },
-});
+      // 遷移
+      router.push({
+        pathname: "/thanks",
+        query: {
+          feedbackMethod: "フォーム入力",
+          username: extra.instagram,
+          lineName: extra.line,
+          fullName,
+          university: extra.university,
+          grade: extra.grade,
+          industry1: extra.industry1,
+          industry2: extra.industry2,
+          industry3: extra.industry3,
+          job1: extra.job1,
+          job2: extra.job2,
+          job3: extra.job3,
+        },
+      });
+    } catch (err: any) {
+      console.error("Firestore保存 or Discord送信エラー：", err);
+      setError("送信に失敗しました：" + err.message);
+    }
+  };
 
-
-  } catch (err: any) {
-  console.error("Firestore保存 or 遷移エラー：", err);
-  setError("送信に失敗しました：" + err.message);
-}
-};
 
 
   const input = (placeholder: string, key: keyof typeof extra) => (
