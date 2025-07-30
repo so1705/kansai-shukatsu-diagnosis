@@ -157,7 +157,8 @@ export default function IndexPage() {
           <label className="block font-semibold mb-1">
             フィードバックは公式ラインでさせていただきます！
             <br/>
-            本人確認の為にお手数ですが以下項目ご記入ください！
+            より正確なFB（年齢や、希望職種、希望勤務地などによるアドバイス）のために<br/>
+            以下項目ご記入ください！
             <br/>
             （最後のページにLINE追加URLあります。）
             　　　<br/>
