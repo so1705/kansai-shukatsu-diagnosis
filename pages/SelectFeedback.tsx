@@ -16,8 +16,10 @@ export default function SelectFeedback() {
     job1,
     job2,
     job3,
-    answers,
+    answers: rawAnswers,
   } = router.query;
+
+  const answers = rawAnswers ? JSON.parse(decodeURIComponent(rawAnswers as string)) : [];
 
   const hasSubmitted = useRef(false);
 
@@ -40,7 +42,7 @@ export default function SelectFeedback() {
           job1,
           job2,
           job3,
-          answers,
+          answers: encodeURIComponent(JSON.stringify(answers)),
           feedbackType: type,
         },
       });

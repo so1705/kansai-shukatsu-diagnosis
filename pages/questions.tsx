@@ -43,29 +43,27 @@ export default function QuestionsPage() {
 
   useEffect(() => {
     if (answers.length === questions.length) {
-      const query = {
-        feedbackMethod,
-        username,
-        lineName,
-        fullName,
-        university,
-        grade,
-        industry1,
-        industry2,
-        industry3,
-        job1,
-        job2,
-        job3,
-        answers: JSON.stringify(answers),
-      };
-      router.push({
-        pathname: "/SelectFeedback",
-        query: {
-          ...query,
-          answers: encodeURIComponent(JSON.stringify(answers)),
-        },
-      });
-    }
+  const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
+  router.push({
+    pathname: "/SelectFeedback",
+    query: {
+      feedbackMethod,
+      username,
+      lineName,
+      fullName,
+      university,
+      grade,
+      industry1,
+      industry2,
+      industry3,
+      job1,
+      job2,
+      job3,
+      answers: encodedAnswers,
+    },
+  });
+}
+
   }, [answers]);
 
   return (

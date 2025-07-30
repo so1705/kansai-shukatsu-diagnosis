@@ -58,6 +58,8 @@ export default function IndexPage() {
     const fullName = `${extra.lastName}${extra.firstName}`;
     const birth = `${extra.birthYear.replace("年", "")}-${extra.birthMonth.replace("月", "").padStart(2, "0")}-${extra.birthDay.replace("日", "").padStart(2, "0")}`;
     const graduate = `${extra.graduateYear}${extra.graduateMonth}`;
+    const { answers: rawAnswers } = router.query;
+    const answers = rawAnswers ? JSON.parse(decodeURIComponent(rawAnswers as string)) : [];
 
     // Discord送信
       await axios.post("/api/sendToDiscord", {
@@ -73,7 +75,6 @@ export default function IndexPage() {
         job2: extra.job2,
         job3: extra.job3,
         feedbackType: "フォーム入力",
-        answers: [], // 設問データがあればここに格納
       });
 
       // Firestore保存
@@ -99,6 +100,7 @@ export default function IndexPage() {
           job1: extra.job1,
           job2: extra.job2,
           job3: extra.job3,
+          answers: encodeURIComponent(JSON.stringify(answers)),
         },
       });
     } catch (err: any) {
