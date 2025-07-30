@@ -1,104 +1,107 @@
-import Image from "next/image";
+// pages/results.tsx
 import { useRouter } from "next/router";
+import { useState } from "react";
 import axios from "axios";
-import { useRef } from "react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-export default function SelectFeedback() {
+const ResultsPage = () => {
   const router = useRouter();
-  const {
-    username,
-    lineName,
-    fullName,
-    university,
-    grade,
-    industry1,
-    industry2,
-    industry3,
-    job1,
-    job2,
-    job3,
-    answers,
-  } = router.query;
 
-  const hasSubmitted = useRef(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    lastName: "",
+    firstName: "",
+    birth: "",
+    gender: "",
+    address: "",
+    phone: "",
+    email: "",
+    university: "",
+    faculty: "",
+    grade: "",
+    graduateYear: "",
+    graduateMonth: "",
+    industry1: "",
+    industry2: "",
+    industry3: "",
+    job1: "",
+    job2: "",
+    job3: "",
+    location1: "",
+    location2: "",
+    location3: "",
+  });
 
-  const handleSelect = async (type: string) => {
-    if (hasSubmitted.current) return;
-    hasSubmitted.current = true;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    const answers = JSON.parse(localStorage.getItem("answers") || "[]");
 
     try {
-      const parsedAnswers = answers
-        ? JSON.parse(decodeURIComponent(answers as string))
-        : [];
-
-      await axios.post("/api/sendToDiscord", {
-        username,
-        lineName,
-        fullName,
-        university,
-        grade,
-        industry1,
-        industry2,
-        industry3,
-        job1,
-        job2,
-        job3,
-        feedbackType: type,
-        answers: parsedAnswers,
+      // Firestoreに保存
+      await addDoc(collection(db, "formData"), {
+        ...formData,
+        timestamp: serverTimestamp(),
       });
 
+      // Discordに送信
+      await axios.post("/api/sendToDiscord", {
+        username: "", // 取得できるなら入れる
+        lineName: "", // 取得できるなら入れる
+        fullName: formData.fullName,
+        university: formData.university,
+        grade: formData.grade,
+        industry1: formData.industry1,
+        industry2: formData.industry2,
+        industry3: formData.industry3,
+        job1: formData.job1,
+        job2: formData.job2,
+        job3: formData.job3,
+        feedbackType: "フォーム送信完了",
+        answers: answers,
+      });
+
+      // thanksページへ遷移
       router.push("/thanks");
-    } catch (err: any) {
-      alert("送信エラー：" + (err?.message || "不明なエラー"));
-      hasSubmitted.current = false;
+    } catch (error) {
+      console.error("送信エラー", error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-4">
-      <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl py-12 px-6 flex flex-col items-center">
-        <div className="w-full flex justify-center mb-6">
-          <Image
-            src="/thanks.png"
-            alt="フィードバックイラスト"
-            width={230}
-            height={230}
-            className="object-contain"
-            priority
-          />
-        </div>
-        <div className="text-2xl md:text-3xl font-extrabold text-[#223a50] mb-2 text-center">
-          ご回答いただきありがとうございました！
-        </div>
-        <div className="text-lg text-gray-700 text-center mb-8 font-semibold">
-          フィードバックの受け取り方法をお選びください。
-        </div>
-        <div className="w-full flex flex-col gap-6">
-          <button
-            onClick={() => handleSelect("面談希望")}
-            className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
-          >
-            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋無料オンライン面談</span>
-            <span className="text-sm font-light text-gray-400 leading-tight mt-1">
-              診断結果の詳しい解説と、<br />
-              あなた専用のキャリア相談を個別にサポート！！
-            </span>
-          </button>
-          <button
-            onClick={() => handleSelect("メール")}
-            className="w-full bg-white text-[#223a50] rounded-2xl font-bold text-lg shadow hover:bg-[#ffd488] transition px-8 py-6 flex flex-col items-center border-2 border-[#ffb94c] hover:border-[#ffd488] focus:outline-none"
-          >
-            <span className="text-3xl md:text-4xl font-extrabold mb-2 text-[#8e24aa]">分析結果＋メールでフィードバック</span>
-            <span className="text-sm font-light text-gray-400 leading-tight mt-1">
-              診断結果と丁寧なフィードバックをメールでお届け！
-            </span>
-          </button>
-          <div className="text-lg text-gray-700 text-center mb-8 leading-relaxed font-semibold">
-          　　　　　　　　　　　<br/>
-          ※次のページもあります<br />
+    <div className="p-6 max-w-3xl mx-auto space-y-4">
+      <h1 className="text-2xl font-bold mb-4">情報の入力</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {Object.keys(formData).map((key) => (
+          <div key={key}>
+            <label className="block text-sm font-semibold mb-1" htmlFor={key}>
+              {key}
+            </label>
+            <input
+              id={key}
+              name={key}
+              type="text"
+              value={(formData as any)[key]}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded p-2"
+            />
           </div>
-        </div>
+        ))}
+      </div>
+      <div className="mt-6 text-center">
+        <button
+          onClick={handleSubmit}
+          className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          結果を送信
+        </button>
       </div>
     </div>
   );
-}
+};
+
+export default ResultsPage;
